@@ -116,9 +116,7 @@ dmypy.json
 # images
 /images
 
-/.DS_store
-.DS_Store
-.DS_Store
+.DS_store
 data/.DS_Store
 
 /extra
