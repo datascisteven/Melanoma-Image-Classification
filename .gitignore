@@ -114,11 +114,10 @@ dmypy.json
 .pyre/
 
 # images
-/images
-
-.DS_store
-data/.DS_Store
-
-/extra
-/output
 /split
+
+# .DS_store
+.DS_Store
+
+# additional code folder
+/extra
