@@ -2,7 +2,13 @@
 
 ## Overview
 
+Skin cancer is the most prevalent type of cancer. Melanoma, specifically, is responsible for 75% of skin cancer deaths, despite being the least common skin cancer. The American Cancer Society estimates over 100,000 new melanoma cases will be diagnosed in 2020. It's also expected that almost 7,000 people will die from the disease. As with other cancers, early and accurate detection—potentially aided by data science—can make treatment more effective.
 
+Currently, dermatologists evaluate every one of a patient's moles to identify outlier lesions or “ugly ducklings” that are most likely to be melanoma. Existing AI approaches have not adequately considered this clinical frame of reference. Dermatologists could enhance their diagnostic accuracy if detection algorithms take into account “contextual” images within the same patient to determine which images represent a melanoma. If successful, classifiers would be more accurate and could better support dermatological clinic work.
+
+As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermoscopic images of skin lesions.
+
+Melanoma is a deadly disease, but if caught early, most melanomas can be cured with minor surgery. Image analysis tools that automate the diagnosis of melanoma will improve dermatologists' diagnostic accuracy. Better detection of melanoma has the opportunity to positively impact millions of people.
 
 ## Business Understanding
 
@@ -11,24 +17,28 @@
 
 ## Data Understanding
 
-There are three datasets
+There are three main datasets that we 
 
-2020 Datasets:
+2020 Training Datasets:
 33,126 DICOM images with embedded metadata and JPEG images with 425 duplicates
 33,126 metadata entries of patient ID, lesion ID, sex, age, and general anatomic site.
 33,126 entries of gold standard lesion diagnoses.
 
-
+2020 Testing Datasets:
 10,982 DICOM images with embedded metadata and JPEG images
 10,982 metadata entries of patient ID, sex, age, and general anatomic site.
 
-
-
+2019 Training Datasets:
 The training data consists of 10015 images and 1 ground truth response CSV file (containing 1 header row and 10015 corresponding response rows).
 
 
 ## Data Preparation
 
+This datasets are offered as part of an annual competition held by ISIC, the International Skin Imaging Collaboration, to promote thewhich sources their data from the following:  Hospital Clinic de Barcelona, Medical University of Vienna, Memorial Sloan Kettering Cancer Center, Melanoma Institute Australia, University of Queensland, and the University of Athens Medical School.
+
+The dataset contains 33,126 dermoscopic training images of skin lesions from over 2000 patients, and the images are either in DICOM format, which is a common medical imaging data format.  Images are also provided in JPEG and TYFRecord format.  DICOM files contain both the image and metadata.  Metadata is also provided outside of the DICOM format in CSV format, which includes the patient ID, sex, approximate age, location of imaged site, diagnosis information, indicator of malignancy, and binarized version of target variable (melanoma or not melanoma).
+
+Using the patient-level contextual information may help the development of image analysis tools, which could better support clinical dermatologists.  This year’s challenge is to use images within the same patient and determine which are likely to represent a melanoma.
 
 
 
