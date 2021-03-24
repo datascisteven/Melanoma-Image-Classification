@@ -12,7 +12,11 @@ Melanoma is a deadly disease, but if caught early, most melanomas can be cured w
 
 ## Business Understanding
 
+According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95%, which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
 
+Doctors can detect melanomas through visual inspection supplemented by their years of clinical experience, but recent studies have shown that machine learning can detect such lesions through image analysis can be as reliable as if not more than a visit with the dermatologist.  Deploying a web app that can screen for potential melanoma would equalize access to individuals without easy access to advice from an expert clinician such as for those from lower socio-economic status.  
+
+Those very populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers are due to past offenses and some purely cultural.  Creating such an app would allow for access by such individuals and break down some of these initial barriers so that they may receive the care they truly need.
 
 
 ## Data Understanding
