@@ -24,16 +24,19 @@ Those very populations inherently have constructed a certain skepticism and reti
 There are three main datasets that we 
 
 2020 Training Datasets:
-33,126 DICOM images with embedded metadata and JPEG images with 425 duplicates
-33,126 metadata entries of patient ID, lesion ID, sex, age, and general anatomic site.
-33,126 entries of gold standard lesion diagnoses.
+- 33,126 DICOM images with embedded metadata and JPEG images with 425 duplicates
+- 33,126 metadata entries of patient ID, lesion ID, sex, age, and general anatomic site.
+- Training Set: 467 melanoma vs. 26033 non-melanoma images
+- Validation Set: 117 melanoma vs. 6509 non-melanoma images
 
 2020 Testing Datasets:
-10,982 DICOM images with embedded metadata and JPEG images
-10,982 metadata entries of patient ID, sex, age, and general anatomic site.
+- 10,982 DICOM images with embedded metadata and JPEG images
+- 10,982 metadata entries of patient ID, sex, age, and general anatomic site.
+- Holdout Set: 10982 images
 
-2019 Training Datasets:
-The training data consists of 10015 images and 1 ground truth response CSV file (containing 1 header row and 10015 corresponding response rows).
+Additional Datasets for minority class:
+- 4522 additional melanoma images from the 2019 Training Dataset
+- 1114 additional melanoma images from the 2018 Training Dataset
 
 
 ## Data Preparation
@@ -43,8 +46,6 @@ This datasets are offered as part of an annual competition held by ISIC, the Int
 The dataset contains 33,126 dermoscopic training images of skin lesions from over 2000 patients, and the images are either in DICOM format, which is a common medical imaging data format.  Images are also provided in JPEG and TYFRecord format.  DICOM files contain both the image and metadata.  Metadata is also provided outside of the DICOM format in CSV format, which includes the patient ID, sex, approximate age, location of imaged site, diagnosis information, indicator of malignancy, and binarized version of target variable (melanoma or not melanoma).
 
 Using the patient-level contextual information may help the development of image analysis tools, which could better support clinical dermatologists.  This year’s challenge is to use images within the same patient and determine which are likely to represent a melanoma.
-
-
 
 
 ## EDA Insights:
