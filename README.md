@@ -11,7 +11,7 @@ Those very populations inherently have constructed a certain skepticism and reti
 
 ## Data Understanding
 
-As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermoscopic images of skin lesions.
+As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermatoscopic images of skin lesions.
 
 There are three public repositories curated by SIIM-ISCC that we relied on for the project:
 
@@ -26,7 +26,7 @@ There are three public repositories curated by SIIM-ISCC that we relied on for t
 - 10,982 metadata entries of patient ID, sex, age, and general anatomic site.
 - Holdout Set: 10982 images
 
-The 2020 dataset contains 33,126 dermoscopic training images of skin lesions from over 2000 patients, and the images are either in DICOM format, which is a common medical imaging data format or in JPEG and TYFRecord format.  DICOM files contain both the image and metadata, but the metadata is also provided outside of the DICOM format in CSV format, which includes the following features:
+The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions from over 2000 patients, and the images are either in DICOM format, which is a common medical imaging data format or in JPEG and TYFRecord format.  DICOM files contain both the image and metadata, but the metadata is also provided outside of the DICOM format in CSV format, which includes the following features:
 
 1. patient ID
 2. gender
@@ -44,16 +44,48 @@ Additional Datasets for minority class augmentation:
 
 ## Data Preparation:
 
-The dataset of images has been extremely unwieldy, totaling about 100 GB of file memory.  One of the challenge has been working with such a memory intensive in terms of disk space Our time has been divided between organizing the 
+**File and folder management**
+- Challenges with unstructured data
+- Keras requires the data to be organized into training, validation, and testing folders with the classes organized as subfolders to create the testing sets
+- Time consuming process of moving folders 
+- Challenge of incorporating folder
 
+**Class Imbalance**
+- Employ a variety of methods to address severe class imbalance
+- ImageDataGenerator
+- Albumentations
 
 
 
 ## Modeling and Evaluation:
 
+**Baseline Model:**
+- `Sequential()`
+- 2 convolutional layers with input shape (224, 244, 3) with filters applied to extract different features:
+	- Filters: number of filters that convolutional layer will learn
+	- `kernel_size`: specifies width and height of 2D convolutional window
+	- Padding:  same ensure that spatial dimensions are the same after convolution
+	- Activation:  activation function that will be applied for convolutional layers
+	- `layers.Conv2D(input_shape=(224,224,3), filters=64, kernel_size=(3,3), padding="same", activation="relu"))`
+- `BatchNormalization()`
+	- acts like standardization or normalization for regression models
+- `MaxPool2D()` 
+	- To reduce dimensionality of images by reducing number of pixels in output
+- `layers.MaxPool2D(pool_size=(2,2),strides=(2,2))`
+- `Flatten()`
+	- To be able to generate a prediction, flatten output of convolutional base
+- `layers.Flatten()`
+- Dense layers feeds output of convolutional base to neurons
+- `layers.Dense(units=4096, activation="relu"))`
+- Loss function:  `loss= ‘binary_crossentropy’`
+- Optimizer:  `Adam(learning_rate=0.01)`
 
-
-
+**Metrics:**
+- Accuracy
+- Precision (Positive Predictive Value)
+- Recall (True Positive Rate)
+- ROC-AUC Score
+- PR-AUC Score
 
 
 ## For More Information:
