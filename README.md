@@ -1,104 +1,99 @@
 # Web or App Implementation of Melanoma Image Classifier
 
-## Overview
+## Overview and Business Understanding
 
-Skin cancer is the most prevalent type of cancer. Melanoma, specifically, is responsible for 75% of skin cancer deaths, despite being the least common skin cancer. The American Cancer Society estimates over 100,000 new melanoma cases will be diagnosed in 2020. It's also expected that almost 7,000 people will die from the disease. As with other cancers, early and accurate detection—potentially aided by data science—can make treatment more effective.
+Skin cancer is the most prevalent type of cancer with melanoma being responsible for 75% of skin cancer deaths despite being the least common type. According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95% and can be cured with minor surgery. which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
 
-Currently, dermatologists evaluate every one of a patient's moles to identify outlier lesions or “ugly ducklings” that are most likely to be melanoma. Existing AI approaches have not adequately considered this clinical frame of reference. Dermatologists could enhance their diagnostic accuracy if detection algorithms take into account “contextual” images within the same patient to determine which images represent a melanoma. If successful, classifiers would be more accurate and could better support dermatological clinic work.
-
-As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermoscopic images of skin lesions.
-
-Melanoma is a deadly disease, but if caught early, most melanomas can be cured with minor surgery. Image analysis tools that automate the diagnosis of melanoma will improve dermatologists' diagnostic accuracy. Better detection of melanoma has the opportunity to positively impact millions of people.
-
-## Business Understanding
-
-According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95%, which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
-
-Doctors can detect melanomas through visual inspection supplemented by their years of clinical experience, but recent studies have shown that machine learning can detect such lesions through image analysis can be as reliable as if not more than a visit with the dermatologist.  Deploying a web app that can screen for potential melanoma would equalize access to individuals without easy access to advice from an expert clinician such as for those from lower socio-economic status.  
+Doctors can detect melanomas through visual inspection supplemented by their years of clinical experience, but recent studies have shown that machine learning can detect such lesions through image analysis can be as reliable as if not more than a visit with the dermatologist.  Deploying an app for public consumption that can screen for potential melanoma would be essential to prevent unnecessary death and equalize access to individuals without easy access to advice from an expert clinician especially those from lower socio-economic status.  
 
 Those very populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers are due to past offenses and some purely cultural.  Creating such an app would allow for access by such individuals and break down some of these initial barriers so that they may receive the care they truly need.
 
 
 ## Data Understanding
 
-There are three main datasets that we 
+As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermoscopic images of skin lesions.
 
-2020 Training Datasets:
+There are three public repositories curated by SIIM-ISCC that we relied on for the project:
+
+2020 Training Dataset:
 - 33,126 DICOM images with embedded metadata and JPEG images with 425 duplicates
 - 33,126 metadata entries of patient ID, lesion ID, sex, age, and general anatomic site.
 - Training Set: 467 melanoma vs. 26033 non-melanoma images
 - Validation Set: 117 melanoma vs. 6509 non-melanoma images
 
-2020 Testing Datasets:
+2020 Testing Dataset:
 - 10,982 DICOM images with embedded metadata and JPEG images
 - 10,982 metadata entries of patient ID, sex, age, and general anatomic site.
 - Holdout Set: 10982 images
 
-Additional Datasets for minority class:
+The 2020 dataset contains 33,126 dermoscopic training images of skin lesions from over 2000 patients, and the images are either in DICOM format, which is a common medical imaging data format or in JPEG and TYFRecord format.  DICOM files contain both the image and metadata, but the metadata is also provided outside of the DICOM format in CSV format, which includes the following features:
+
+1. patient ID
+2. gender
+3. approximate age
+4. location of imaged site,
+5. diagnosis information
+6. indicator of malignancy
+7. binarized version of target variable (melanoma or not melanoma)
+
+
+Additional Datasets for minority class augmentation:
 - 4522 additional melanoma images from the 2019 Training Dataset
 - 1114 additional melanoma images from the 2018 Training Dataset
 
 
-## Data Preparation
+## Data Preparation:
 
-This datasets are offered as part of an annual competition held by ISIC, the International Skin Imaging Collaboration, to promote thewhich sources their data from the following:  Hospital Clinic de Barcelona, Medical University of Vienna, Memorial Sloan Kettering Cancer Center, Melanoma Institute Australia, University of Queensland, and the University of Athens Medical School.
-
-The dataset contains 33,126 dermoscopic training images of skin lesions from over 2000 patients, and the images are either in DICOM format, which is a common medical imaging data format.  Images are also provided in JPEG and TYFRecord format.  DICOM files contain both the image and metadata.  Metadata is also provided outside of the DICOM format in CSV format, which includes the patient ID, sex, approximate age, location of imaged site, diagnosis information, indicator of malignancy, and binarized version of target variable (melanoma or not melanoma).
-
-Using the patient-level contextual information may help the development of image analysis tools, which could better support clinical dermatologists.  This year’s challenge is to use images within the same patient and determine which are likely to represent a melanoma.
-
-
-## EDA Insights:
+The dataset of images has been extremely unwieldy, totaling about 100 GB of file memory.  One of the challenge has been working with such a memory intensive in terms of disk space Our time has been divided between organizing the 
 
 
 
 
-## Model Performance:
+## Modeling and Evaluation:
 
 
-
-
-
-
-
-
-
-
-## Repository Contents:
 
 
 
 
 ## For More Information:
 
+**Steven Yan**
 
+Email:  [stevenyan@uchicago.edu][1]
+
+LinkedIn:   [https://www.linkedin.com/in/examsherpa][2]
+
+Github:  [https://www.github.com/examsherpa][3]
 
 
 
 ## References:
 
-**2020 Dataset:**
+International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration [https://doi.org/10.34970/2020-ds01][4] (2020).
 
-International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration https://doi.org/10.34970/2020-ds01 (2020).
-
-Rotemberg, V., Kurtansky, N., Betz-Stablein, B., Caffery, L., Chousakos, E., Codella, N., Combalia, M., Dusza, S., Guitera, P., Gutman, D., Halpern, A., Helba, B., Kittler, H., Kose, K., Langer, S., Lioprys, K., Malvehy, J., Musthaq, S., Nanda, J., Reiter, O., Shih, G., Stratigos, A., Tschandl, P., Weber, J. & Soyer, P. A patient-centric dataset of images and metadata for identifying melanomas using clinical context. Sci Data 8, 34 (2021). [https://doi.org/10.1038/s41597-021-00815-z]()
-
-**2019 Dataset:**
+Rotemberg, V. _et al_. A patient-centric dataset of images and metadata for identifying melanomas using clinical context. _Sci. Data_ 8: 34 (2021). [https://doi.org/10.1038/s41597-021-00815-z]()
 
 ISIC 2019 data is provided courtesy of the following sources:
+
 BCN20000 Dataset: (c) Department of Dermatology, Hospital Clínic de Barcelona
-HAM10000 Dataset: (c) by ViDIR Group, Department of Dermatology, Medical University of Vienna; https://doi.org/10.1038/sdata.2018.161
-MSK Dataset: (c) Anonymous; [https://arxiv.org/abs/1710.05006]() ; [https://arxiv.org/abs/1902.03368]()
+HAM10000 Dataset: (c) by ViDIR Group, Department of Dermatology, Medical University of Vienna; [https://doi.org/10.1038/sdata.2018.161][6]
+MSK Dataset: (c) Anonymous; [https://arxiv.org/abs/1710.05006][7] ; [https://arxiv.org/abs/1902.03368][8]
 
-Tschandl P., Rosendahl C. & Kittler H. The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions. Sci. Data 5, 180161 doi.10.1038/sdata.2018.161 (2018)
+Tschandl, P. _et al_. The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions. _Sci. Data_ 5: 180161 doi: 10.1038/sdata.2018.161 (2018)
 
-Noel C. F. Codella, David Gutman, M. Emre Celebi, Brian Helba, Michael A. Marchetti, Stephen W. Dusza, Aadi Kalloo, Konstantinos Liopyris, Nabin Mishra, Harald Kittler, Allan Halpern: “Skin Lesion Analysis Toward Melanoma Detection: A Challenge at the 2017 International Symposium on Biomedical Imaging (ISBI), Hosted by the International Skin Imaging Collaboration (ISIC)”, 2017; arXiv:1710.05006.
+Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection: A Challenge at the 2017 International Symposium on Biomedical Imaging (ISBI), Hosted by the International Skin Imaging Collaboration (ISIC)”, 2017; arXiv:1710.05006.
 
 Marc Combalia, Noel C. F. Codella, Veronica Rotemberg, Brian Helba, Veronica Vilaplana, Ofer Reiter, Allan C. Halpern, Susana Puig, Josep Malvehy: “BCN20000: Dermoscopic Lesions in the Wild”, 2019; arXiv:1908.02288.
 
-**2018 Dataset:**
+Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection 2018: A Challenge Hosted by the International Skin Imaging Collaboration (ISIC)”, 2018; [https://arxiv.org/abs/1902.03368][9]
 
-Noel Codella, Veronica Rotemberg, Philipp Tschandl, M. Emre Celebi, Stephen Dusza, David Gutman, Brian Helba, Aadi Kalloo, Konstantinos Liopyris, Michael Marchetti, Harald Kittler, Allan Halpern: “Skin Lesion Analysis Toward Melanoma Detection 2018: A Challenge Hosted by the International Skin Imaging Collaboration (ISIC)”, 2018; https://arxiv.org/abs/1902.03368
 
-Tschandl, P., Rosendahl, C. & Kittler, H. The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions. Sci. Data 5, 180161 doi:10.1038/sdata.2018.161 (2018).
-
+[1]:	mailto:stevenyan@uchicago.edu
+[2]:	https://www.linkedin.com/in/examsherpa
+[3]:	https://www.github.com/examsherpa
+[4]:	https://doi.org/10.34970/2020-ds01
+[6]:	https://doi.org/10.1038/sdata.2018.161
+[7]:	https://arxiv.org/abs/1710.05006
+[8]:	https://arxiv.org/abs/1902.03368
+[9]:	https://arxiv.org/abs/1902.03368
