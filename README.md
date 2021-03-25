@@ -52,10 +52,10 @@ Additional Datasets for minority class augmentation:
 
 **Class Imbalance**
 - Employ a variety of methods to address severe class imbalance
-- ImageDataGenerator
-- Albumentations
+- ImageDataGenerator (options offered by 
+- Albumentations (module for 
 
-
+Some of the challenges we faced in the initial phase of the project include learning to manage such a large set of unstructured data and whether to incorporate the use of DICOM files into the project.  DICOM is a specific file format that is specific to the medical industry.  The file contains not only the image file but also the metadata, which consists of patient information, both personal and clinical.  Learning how to use 
 
 ## Modeling and Evaluation:
 
