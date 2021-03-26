@@ -110,6 +110,8 @@ def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
     axs[1, 2].set_ylabel('Loss')
     axs[1, 2].set_title('Loss Scores')
 
+    fig.tight_layout(h_pad=5, w_pad=5)
+
 # courtesy of DTrimarchi10 on Github
 def make_confusion_matrix(cf, X, y, model,
                           group_names=['TN','FP','FN','TP'],
