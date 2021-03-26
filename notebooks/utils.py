@@ -7,6 +7,8 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import Sequence
 from sklearn.metrics import precision_score, recall_score, f1_score, average_precision_score
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 class MergedGenerators(Sequence):
