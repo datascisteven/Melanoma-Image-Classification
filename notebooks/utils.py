@@ -73,44 +73,52 @@ def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
         `var` is the variable that we set `model.fit` or `model.fit_generator`
         `auc`, `pr_auc`, `rec`, `prec`, etc. must be strings with quotes, i.e. `'auc_4'` or `'precision_8'`
     """
+    plt.style.use('fivethirtyeight')
+
     f, axs = plt.subplots(2, 3, figsize=(14, 8))
-    axs[0, 0].plot(var.history['accuracy'])
-    axs[0, 0].plot(var.history['val_accuracy'])
+    axs[0, 0].plot(var.history['accuracy'], label = 'train')
+    axs[0, 0].plot(var.history['val_accuracy'], label = 'validation')
     axs[0, 0].set_xlabel('Epoch')
     axs[0, 0].set_ylabel('Accuracy')
+    axs[0, 0].legend()
     axs[0, 0].set_title('Accuracy Scores')
     
-    axs[0, 1].plot(var.history[auc])
-    axs[0, 1].plot(var.history[v_auc])
+    axs[0, 1].plot(var.history[auc], label = 'train')
+    axs[0, 1].plot(var.history[v_auc], label = 'validation')
     axs[0, 1].set_xlabel('Epoch')
     axs[0, 1].set_ylabel('ROC-AUC')
+    axs[0, 1].legend()
     axs[0, 1].set_title('ROC/AUC Scores')
     
-    axs[0, 2].plot(var.history[pr_auc])
-    axs[0, 2].plot(var.history[v_pr_auc])
+    axs[0, 2].plot(var.history[pr_auc], label = 'train')
+    axs[0, 2].plot(var.history[v_pr_auc], label = 'validation')
     axs[0, 2].set_xlabel('Epoch')
     axs[0, 2].set_ylabel('PR-AUC')
+    axs[0, 2].legend()
     axs[0, 2].set_title('PR/AUC Scores')
     
-    axs[1, 0].plot(var.history[prec])
-    axs[1, 0].plot(var.history[v_prec])
+    axs[1, 0].plot(var.history[prec], label = 'train')
+    axs[1, 0].plot(var.history[v_prec], label = 'validation')
     axs[1, 0].set_xlabel('Epoch')
     axs[1, 0].set_ylabel('Precision')
+    axs[1, 0].legend()
     axs[1, 0].set_title('Precision Scores')
     
-    axs[1, 1].plot(var.history[rec])
-    axs[1, 1].plot(var.history[v_rec])
+    axs[1, 1].plot(var.history[rec], label = 'train')
+    axs[1, 1].plot(var.history[v_rec], label = 'validation')
     axs[1, 1].set_xlabel('Epoch')
     axs[1, 1].set_ylabel('Recall')
+    axs[1, 1].legend()
     axs[1, 1].set_title('Recall Scores')
     
-    axs[1, 2].plot(var.history['loss'])
-    axs[1, 2].plot(var.history['val_loss'])
+    axs[1, 2].plot(var.history['loss'], label = 'train')
+    axs[1, 2].plot(var.history['val_loss'], label = 'validation')
     axs[1, 2].set_xlabel('Epoch')
     axs[1, 2].set_ylabel('Loss')
+    axs[1, 2].legend()
     axs[1, 2].set_title('Loss Scores')
 
-    fig.tight_layout(h_pad=5, w_pad=5)
+    f.tight_layout(h_pad=5, w_pad=5)
 
 # courtesy of DTrimarchi10 on Github
 def make_confusion_matrix(cf, X, y, model,
@@ -135,13 +143,11 @@ def make_confusion_matrix(cf, X, y, model,
     count:         If True, show the raw number in the confusion matrix. Default is True.
     normalize:     If True, show the proportions for each category. Default is True.
     cbar:          If True, show the color bar. The cbar values are based off the values in the confusion matrix.
-                   Default is True.
     xyticks:       If True, show x and y ticks. Default is True.
     xyplotlabels:  If True, show 'True Label' and 'Predicted Label' on the figure. Default is True.
     sum_stats:     If True, display summary statistics below the figure. Default is True.
     figsize:       Tuple representing the figure size. Default will be the matplotlib rcParams value.
-    cmap:          Colormap of the values displayed from matplotlib.pyplot.cm. Default is 'Blues'
-                   See http://matplotlib.org/examples/color/colormaps_reference.html                  
+    cmap:          Colormap of the values displayed from matplotlib.pyplot.cm. Default is 'Blues'               
     title:         Title for the heatmap. Default is None.
     '''
 
@@ -164,7 +170,6 @@ def make_confusion_matrix(cf, X, y, model,
 
     # CODE TO GENERATE SUMMARY STATISTICS & TEXT FOR SUMMARY STATS
     if sum_stats:
-        #Accuracy is sum of diagonal divided by total observations
         accuracy  = np.trace(cf) / float(np.sum(cf))
         #if it is a binary confusion matrix, show some more stats
         if len(cf)==2:
