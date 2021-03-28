@@ -8,6 +8,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import Sequence
 from sklearn.metrics import precision_score, recall_score, f1_score, average_precision_score
 from PIL import ImageFile
+from sklearn.metrics import confusion_matrix
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
@@ -120,104 +121,6 @@ def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
 
     f.tight_layout(h_pad=5, w_pad=5)
 
-# courtesy of DTrimarchi10 on Github
-def make_confusion_matrix(cf, X, y, model,
-                          group_names=['TN','FP','FN','TP'],
-                          categories='auto',
-                          count=True,
-                          percent=True,
-                          cbar=True,
-                          xyticks=True,
-                          xyplotlabels=True,
-                          sum_stats=True,
-                          figsize=None,
-                          cmap='Blues',
-                          title=None):
-    '''
-    This function will make a pretty plot of an sklearn Confusion Matrix cm using a Seaborn heatmap visualization.
-    Arguments
-    ---------
-    cf:            confusion matrix to be passed in
-    group_names:   List of strings that represent the labels row by row to be shown in each square.
-    categories:    List of strings containing the categories to be displayed on the x,y axis. Default is 'auto'
-    count:         If True, show the raw number in the confusion matrix. Default is True.
-    normalize:     If True, show the proportions for each category. Default is True.
-    cbar:          If True, show the color bar. The cbar values are based off the values in the confusion matrix.
-    xyticks:       If True, show x and y ticks. Default is True.
-    xyplotlabels:  If True, show 'True Label' and 'Predicted Label' on the figure. Default is True.
-    sum_stats:     If True, display summary statistics below the figure. Default is True.
-    figsize:       Tuple representing the figure size. Default will be the matplotlib rcParams value.
-    cmap:          Colormap of the values displayed from matplotlib.pyplot.cm. Default is 'Blues'               
-    title:         Title for the heatmap. Default is None.
-    '''
-
-    # CODE TO GENERATE TEXT INSIDE EACH SQUARE
-    blanks = ['' for i in range(cf.size)]
-    if group_names and len(group_names)==cf.size:
-        group_labels = ["{}\n".format(value) for value in group_names]
-    else:
-        group_labels = blanks
-    if count:
-        group_counts = ["{0:0.0f}\n".format(value) for value in cf.flatten()]
-    else:
-        group_counts = blanks
-    if percent:
-        group_percentages = ["{0:.2%}".format(value) for value in cf.flatten()/np.sum(cf)]
-    else:
-        group_percentages = blanks
-    box_labels = [f"{v1}{v2}{v3}".strip() for v1, v2, v3 in zip(group_labels,group_counts,group_percentages)]
-    box_labels = np.asarray(box_labels).reshape(cf.shape[0],cf.shape[1])
-
-    # CODE TO GENERATE SUMMARY STATISTICS & TEXT FOR SUMMARY STATS
-    if sum_stats:
-        accuracy  = np.trace(cf) / float(np.sum(cf))
-        #if it is a binary confusion matrix, show some more stats
-        if len(cf)==2:
-            #Metrics for Binary Confusion Matrices
-            precision = cf[1,1] / sum(cf[:,1])
-            recall    = cf[1,1] / sum(cf[1,:])
-            f1_score  = 2*precision*recall / (precision + recall)
-            pr_auc = aps(X, y, model)
-            stats_text = "\n\nPrecision={:0.3f}\nRecall={:0.3f}\nF1 Score={:0.3f}\nPR AUC Score={:0.3f}".format(
-                precision,recall,f1_score, pr_auc)
-        else:
-            stats_text = "\n\nAccuracy={:0.3f}".format(accuracy)
-    else:
-        stats_text = ""
-
-    # SET FIGURE PARAMETERS ACCORDING TO OTHER ARGUMENTS
-    if figsize==None:
-        #Get default figure size if not set
-        figsize = plt.rcParams.get('figure.figsize')
-    if xyticks==False:
-        #Do not show categories if xyticks is False
-        categories=False
-
-    # MAKE THE HEATMAP VISUALIZATION
-    plt.figure(figsize=figsize)
-    sns.heatmap(cf,annot=box_labels,fmt="",cmap=cmap,cbar=cbar,xticklabels=categories,yticklabels=categories)
-    if xyplotlabels:
-        plt.ylabel('True label')
-        plt.xlabel('Predicted label' + stats_text)
-    else:
-        plt.xlabel(stats_text)    
-    if title:
-        plt.title(title)
-
-def f1(y, y_hat):
-    """
-        Function to calculate F1 score from precision and recall
-        where y is original labels and y_hat is predicted labels
-    """
-    precision_score = precision(y, y_hat)
-    recall_score = recall(y, y_hat)
-    numerator = precision_score * recall_score
-    denominator = precision_score + recall_score
-    if denominator == 0:
-        return np.nan
-    else:
-        return 2 * (numerator / denominator)
-
 def precision(y, y_hat):
     """
         Function to calculate precision score
@@ -277,3 +180,12 @@ def get_metrics(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
     print('Validation Precision Score: ', pr_val)
     print('Training Average Precision Score: ', aps_tr)
     print('Validation Average Precision Score: ', aps_val)
+
+def make_confusion_matrix(y, y_pred):
+    cnf = confusion_matrix(y, y_pred)
+    group_names = ['TN','FP','FN','TP']
+    group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
+    group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
+    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
+    labels = np.asarray(labels).reshape(2,2)
+    sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':16})
