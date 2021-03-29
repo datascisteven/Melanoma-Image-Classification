@@ -91,6 +91,7 @@ Some of the challenges we faced in the initial phase of the project include lear
 
 ## Folder Structure:
 
+```
 ├── README.md                   <- the top-level README for reviewers of this project
 ├── _notebooks			<- folder containing all the project notebooks
 │   ├── albumentation.ipynb		<- notebook for displaying augmentations
@@ -126,7 +127,7 @@ Some of the challenges we faced in the initial phase of the project include lear
 ├── _sample			<- folder containing sample dataset of images (not on Github)
 ├── _models			<- folder containing saved models (not on Github)
 └── utils.py			<- py file with self-defined functions
-
+```
 
 ## Contact Information:
 
