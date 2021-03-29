@@ -122,3 +122,4 @@ dmypy.json
 # additional code folder
 /extra
 /sample
+/models

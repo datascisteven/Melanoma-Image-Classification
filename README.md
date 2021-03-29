@@ -37,9 +37,7 @@ The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions f
 7. binarized version of target variable (melanoma or not melanoma)
 
 
-Additional Datasets for minority class augmentation:
-- 4522 additional melanoma images from the 2019 Training Dataset
-- 1114 additional melanoma images from the 2018 Training Dataset
+
 
 
 ## Data Preparation:
@@ -52,8 +50,11 @@ Additional Datasets for minority class augmentation:
 
 **Class Imbalance**
 - Employ a variety of methods to address severe class imbalance
-- ImageDataGenerator (options offered by 
-- Albumentations (module for 
+- Additional Datasets for minority class augmentation:
+	- 4522 additional melanoma images from the 2019 Training Dataset
+	- 1114 additional melanoma images from the 2018 Training Dataset
+- ImageDataGenerator() transformations
+- Albumentation() transformations
 
 Some of the challenges we faced in the initial phase of the project include learning to manage such a large set of unstructured data and whether to incorporate the use of DICOM files into the project.  DICOM is a specific file format that is specific to the medical industry.  The file contains not only the image file but also the metadata, which consists of patient information, both personal and clinical.  Learning how to use 
 
@@ -86,6 +87,45 @@ Some of the challenges we faced in the initial phase of the project include lear
 - Recall (True Positive Rate)
 - ROC-AUC Score
 - PR-AUC Score
+
+
+## Folder Structure:
+
+	├── README.md                   <- the top-level README for reviewers of this project
+	├── _notebooks					<- folder containing all the project notebooks
+	|   ├── albumentation.ipynb			<- notebook for displaying augmentations
+	│ 	├── EDA.ipynb					<- notebook for dataset understanding and EDA
+	|   ├── folders.ipynb				<- notebook for image folder management
+	│ 	├── modeling.ipynb				<- notebook for models with imbalanced dataset
+	|	├── modeling2.ipynb				<- notebook for models with dataset with augmentations
+	│  	├── pretrained.ipynb			<- notebook for pretrained models
+	|   └── utils.py  					<- py file with self-defined functions
+	├── final_notebook.ipynb        <- final notebook for capstone project
+	├── _data                       <- folder of csv files (csv)
+	├── final_presentation.pdf    	<- pdf of the final project presentation
+	├── MVP Presentation.pdf		<- pdf of the MVP presentation
+	├── _images                     <- folder containing visualizations
+	├── _split						<- folder substructure of image folder (not on Github)
+	│	├──	_train						<- folder containing training JPEG files
+	│	│	├──	_mel					
+	│	│	│	├── _2020
+	│	│	│	├── _2019
+	│	│	│	├── _2018
+	│	│	│	└── _aug
+	│	│	└──	_not_mel				
+	│	├── _train_dcm					<- folder containing training DICOM files
+	│	├── _val						<- folder containing validation JPEG files
+	│	│	├──	_mel
+	│	│	└──	_not_mel					
+	│	├── _test2						<- folder containing test JPEG files
+	│	│	├──	_mel
+	│	│	└──	_not_mel	
+	│	└── _train_imb					<- folder containing original JPEG files
+	│		├──	_mel
+	│		└──	_not_mel	
+	├── _sample						<- folder containing sample dataset of images (not on Github)
+	├── _models						<- folder containing saved models (not on Github)
+	└── utils.py					<- py file with self-defined functions
 
 
 ## For More Information:
