@@ -128,7 +128,7 @@ Some of the challenges we faced in the initial phase of the project include lear
 	└── utils.py					<- py file with self-defined functions
 
 
-## For More Information:
+## Contact Information:
 
 **Steven Yan**
 
