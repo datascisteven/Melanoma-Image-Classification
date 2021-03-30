@@ -2,6 +2,10 @@
 
 ## Overview and Business Understanding
 
+
+
+
+
 Skin cancer is the most prevalent type of cancer with melanoma being responsible for 75% of skin cancer deaths despite being the least common type. According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95% and can be cured with minor surgery. which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
 
 Doctors can detect melanomas through visual inspection supplemented by their years of clinical experience, but recent studies have shown that machine learning can detect such lesions through image analysis can be as reliable as if not more than a visit with the dermatologist.  Deploying an app for public consumption that can screen for potential melanoma would be essential to prevent unnecessary death and equalize access to individuals without easy access to advice from an expert clinician especially those from lower socio-economic status.  
