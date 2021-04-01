@@ -47,7 +47,6 @@ The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions f
 - ground truth data included
 
 
-
 ## Data Preparation:
 
 **File and folder management**
@@ -96,7 +95,9 @@ Some of the challenges we faced in the initial phase of the project include lear
 - ROC-AUC Score
 - PR-AUC Score
 
+ROC-AUC plots the TPR against the FPR, and can be thought of as fractio of correct predictions versus the fraction of errors for the negative class. It is a measure of the disciminative power between the positive and negative classes. At 0.50, a classifier has no discriminative power between the two classes as when there is a FPR and TPR of 0 (predicting all negative class) or FPR and TPR of 1 (Predicting all positive class).  For imbalanced datasets, this is most commonly used metric to compare classification models.
 
+PR-AUC plots precision against recall
 ## Folder Structure:
 
 ```
