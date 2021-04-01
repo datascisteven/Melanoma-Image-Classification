@@ -40,7 +40,11 @@ The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions f
 6. indicator of malignancy
 7. binarized version of target variable (melanoma or not melanoma)
 
-
+2017 Training Dataset:
+- 2000 images in JPEG format and CSV with clinical metadata
+	- 374 images diagnosed as melanoma and 1626 images as other diagnoses lumped into non-melanoma
+- image_id, age_approximate, and sex
+- ground truth data included
 
 
 
