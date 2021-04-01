@@ -59,7 +59,6 @@ The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions f
 - Employ a variety of methods to address severe class imbalance
 - Additional Datasets for minority class augmentation:
 	- 4522 additional melanoma images from the 2019 Training Dataset
-	- 1114 additional melanoma images from the 2018 Training Dataset
 - ImageDataGenerator() transformations
 - Albumentation() transformations
 
@@ -67,26 +66,26 @@ Some of the challenges we faced in the initial phase of the project include lear
 
 ## Modeling and Evaluation:
 
-**Baseline Model:**
+**Convolutional Neural Network rubric:**
 - `Sequential()`
-- 2 convolutional layers with input shape (224, 244, 3) with filters applied to extract different features:
-	- Filters: number of filters that convolutional layer will learn
+- 4 convolutional layers with input shape (256, 256, 3) with filters applied to extract different features:
+	- filters: number of filters that convolutional layer will learn
 	- `kernel_size`: specifies width and height of 2D convolutional window
-	- Padding:  same ensure that spatial dimensions are the same after convolution
-	- Activation:  activation function that will be applied for convolutional layers
+	- padding:  `same` ensure that spatial dimensions are the same after convolution
+	- activation:  activation function that will be applied for convolutional layers, use `relu`
 	- `layers.Conv2D(input_shape=(224,224,3), filters=64, kernel_size=(3,3), padding="same", activation="relu"))`
 - `BatchNormalization()`
 	- acts like standardization or normalization for regression models
 - `MaxPool2D()` 
 	- To reduce dimensionality of images by reducing number of pixels in output
-- `layers.MaxPool2D(pool_size=(2,2),strides=(2,2))`
+	- `layers.MaxPool2D(pool_size=(2,2))`
 - `Flatten()`
 	- To be able to generate a prediction, flatten output of convolutional base
-- `layers.Flatten()`
+	- `layers.Flatten()`
 - Dense layers feeds output of convolutional base to neurons
-- `layers.Dense(units=4096, activation="relu"))`
-- Loss function:  `loss= ‘binary_crossentropy’`
-- Optimizer:  `Adam(learning_rate=0.01)`
+	- `layers.Dense(units=4096, activation="relu"))`
+	- Loss function: for binary classification `loss= ‘binary_crossentropy’
+	- last Dense layer should have unit of 1
 
 **Metrics:**
 - Accuracy
