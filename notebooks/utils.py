@@ -95,3 +95,30 @@ def train_val_metrics(epochs, model_training):
     val2, = ax2.plot(epochs, val_acc)
     ax2.legend([train2, val2], ['training', 'validation'])
     ax2.set(xlabel='epochs', ylabel='accuracy')
+
+def create_model(input_shape):
+    return Sequential([
+        Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same', input_shape=input_shape),
+        Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same'),
+        BatchNormalization(),
+        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
+        Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'),
+        Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'),
+        BatchNormalization(),
+        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
+        Conv2D(filters=256, kernel_size=(3, 3), activation='relu', padding='same'),
+        Conv2D(filters=256, kernel_size=(3, 3), activation='relu', padding='same'),
+        BatchNormalization(),
+        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),   
+        Conv2D(filters=512, kernel_size=(3, 3), activation='relu', padding='same'),
+        Conv2D(filters=512, kernel_size=(3, 3), activation='relu', padding='same'),  
+        BatchNormalization(),
+        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),   
+        Conv2D(filters=512, kernel_size=(3, 3), activation='relu', padding='same'), 
+        Conv2D(filters=512, kernel_size=(3, 3), activation='relu', padding='same'),
+        BatchNormalization(),
+        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),   
+        Flatten(),
+        Dense(units=4096, activation='relu'),
+        Dense(units=1, activation='sigmoid')
+        ])
