@@ -62,7 +62,7 @@ The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions f
 - ImageDataGenerator() transformations
 - Albumentation() transformations
 
-Some of the challenges we faced in the initial phase of the project include learning to manage such a large set of unstructured data and whether to incorporate the use of DICOM files into the project.  DICOM is a specific file format that is specific to the medical industry.  The file contains not only the image file but also the metadata, which consists of patient information, both personal and clinical.  Learning how to use 
+Some of the challenges we faced in the initial phase of the project include learning to manage such a large set of unstructured data and whether to incorporate the use of DICOM files into the project.  DICOM is a specific file format that is specific to the medical industry.  The file contains not only the image file but also the metadata, which consists of patient information, both personal and clinical. We opted not to use the DICOM files because of the enormity of the files.
 
 ## Modeling and Evaluation:
 
