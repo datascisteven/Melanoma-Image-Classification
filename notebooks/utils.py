@@ -7,7 +7,7 @@ from sklearn.metrics import confusion_matrix
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 import tensorflow as tf
 from keras.models import Sequential
-from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization, Conv2D, MaxPool2D
+from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization, Conv2D, MaxPool2D, MaxPooling2D
 
 
 
@@ -167,38 +167,25 @@ def train_val_metrics(epochs, model_training):
 
 def AlexNet():
     return Sequential([
-        Conv2D(filters=96, input_shape=(224, 224, 3), kernel_size=(11, 11), strides=(4, 4), padding='same'),
+        Conv2D(filters=96, input_shape=(227, 227, 3), kernel_size=(11, 11), strides=(4, 4), activation='relu', padding='same'),
         BatchNormalization(),
-        Activation('relu'),
         MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
-        Conv2D(filters=256, kernel_size=(5, 5), strides=(1, 1), padding='same'),
+        Conv2D(filters=256, kernel_size=(5, 5), strides=(1, 1), activation = 'relu', padding='same'),
         BatchNormalization(),
-        Activation('relu'),
         MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
-        Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), padding='same'),
+        Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), activation = 'relu', padding='same'),
         BatchNormalization(),
-        Activation('relu'),
-        Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), padding='same'),
+        Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), activation = 'relu', padding='same'),
         BatchNormalization(),
-        Activation('relu'),
-        Conv2D(filters=256, kernel_size=(3, 3), strides=(1, 1), padding='same'),
+        Conv2D(filters=256, kernel_size=(3, 3), strides=(1, 1), activation = 'relu', padding='same'),
         BatchNormalization(),
-        Activation('relu'),
         MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
         Flatten(),
-        Dense(4096, input_shape=(224, 224, 3, )),
-        BatchNormalization(),
-        Activation('relu'),
+        Dense(4096, activation = 'relu'),
         Dropout(0.4),
-        Dense(4096),
-        BatchNormalization(),
-        Activation('relu'),
+        Dense(4096, activation = 'relu'),
         Dropout(0.4),
-        Dense(1000),
-        BatchNormalization(),
-        Activation('relu'),
+        Dense(1000, activation = 'relu'),
         Dropout(0.4),
-        Dense(1),
-        BatchNormalization(),
-        Activation('sigmoid'),
+        Dense(1, activation = 'sigmoid')
         ])
