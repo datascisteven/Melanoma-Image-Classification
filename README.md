@@ -2,7 +2,9 @@
 
 ## Overview and Business Understanding
 
+<img src="images/melanoma_images.png">
 
+<img src="images/non_melanoma_images.png">
 
 
 
