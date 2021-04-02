@@ -1,12 +1,10 @@
 # Web or App Implementation of Melanoma Image Classifier
 
-## Overview and Business Understanding
-
 <img src="images/melanoma_images.png">
 
 <img src="images/non_melanoma_images.png">
 
-
+## Overview and Business Understanding
 
 Skin cancer is the most prevalent type of cancer with melanoma being responsible for 75% of skin cancer deaths despite being the least common type. According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95% and can be cured with minor surgery. which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
 
@@ -15,22 +13,16 @@ Doctors can detect melanomas through visual inspection supplemented by their yea
 Those very populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers are due to past offenses and some purely cultural.  Creating such an app would allow for access by such individuals and break down some of these initial barriers so that they may receive the care they truly need.
 
 
-## Data Understanding
+## Data Source:
 
 As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermatoscopic images of skin lesions.
 
 There are three public repositories curated by SIIM-ISCC that we relied on for the project:
 
 2020 Training Dataset:
-- 33,126 DICOM images with embedded metadata and JPEG images with 425 duplicates
-- 33,126 metadata entries of patient ID, lesion ID, sex, age, and general anatomic site.
-- Training Set: 467 melanoma vs. 26033 non-melanoma images
-- Validation Set: 117 melanoma vs. 6509 non-melanoma images
-
-2020 Testing Dataset:
-- 10,982 DICOM images with embedded metadata and JPEG images
-- 10,982 metadata entries of patient ID, sex, age, and general anatomic site.
-- Holdout Set: 10982 images
+- 33,126 DICOM images with embedded metadata and 	JPEG images with 425 duplicates
+- 33,126 metadata entries of patient ID, lesion ID, sex, age, and general anatomic site
+- 33,126 entries of gold standard lesion diagnoses
 
 The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions from over 2000 patients, and the images are either in DICOM format, which is a common medical imaging data format or in JPEG and TYFRecord format.  DICOM files contain both the image and metadata, but the metadata is also provided outside of the DICOM format in CSV format, which includes the following features:
 
@@ -42,14 +34,36 @@ The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions f
 6. indicator of malignancy
 7. binarized version of target variable (melanoma or not melanoma)
 
+2019 Training Dataset:
+- 25,331 JPEG images of skin lesions
+- 25,331 metadata entries of age sex general anatomic site, and common lesion identifier
+- 25,331 entries of gold standard lesion diagnoses
+
 2017 Training Dataset:
 - 2000 images in JPEG format and CSV with clinical metadata
 	- 374 images diagnosed as melanoma and 1626 images as other diagnoses lumped into non-melanoma
 - image_id, age_approximate, and sex
-- ground truth data included
+- 2000 entries of gold standard lesion diagnoses
 
 
-## Data Preparation:
+## Data Understanding:
+
+<img src="images/age_distribution.png">
+
+
+
+
+<img src="images/gender_distribution.png">
+
+
+
+
+<img src="images/site_distribution.png">
+
+
+
+
+## Preparation:
 
 **File and folder management**
 - Challenges with unstructured data
