@@ -2,14 +2,13 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-from tensorflow import keras
-from keras.preprocessing.image import ImageDataGenerator
-from keras.preprocessing.image import ImageDataGenerator
-from keras.utils import Sequence
-from sklearn.metrics import precision_score, recall_score, f1_score, average_precision_score
 from PIL import ImageFile
 from sklearn.metrics import confusion_matrix
 ImageFile.LOAD_TRUNCATED_IMAGES = True
+import tensorflow as tf
+from keras.models import Sequential
+from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization, Conv2D, MaxPool2D
+
 
 
 
@@ -121,4 +120,85 @@ def create_model(input_shape):
         Flatten(),
         Dense(units=4096, activation='relu'),
         Dense(units=1, activation='sigmoid')
+        ])
+
+
+def cnn(input_shape):
+    return Sequential([
+        Conv2D(filters=32, kernel_size=(3, 3), activation='relu', padding='same', input_shape=input_shape),
+        Dropout(0.2),
+        MaxPool2D(pool_size=(3, 3)),
+        Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same'),
+        Dropout(0.2),
+        MaxPool2D(pool_size=(2, 2)),
+        Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'),
+        Dropout(0.2),
+        MaxPool2D(pool_size=(2, 2)),
+        Conv2D(filters=256, kernel_size=(3, 3), activation='relu', padding='same'),
+        Dropout(0.2), 
+        MaxPool2D(pool_size=(2, 2)),
+        Flatten(),
+        Dense(units=128, activation='relu'),
+        Dropout(0.25),     
+        Dense(units=1, activation='sigmoid')
+        ])
+
+
+def train_val_metrics(epochs, model_training):
+    epochs = range(1, epochs+1)
+    metrics = model_training.history
+    train_loss = metrics['loss']
+    train_acc = metrics['accuracy']
+    val_loss = metrics['val_loss']
+    val_acc = metrics['val_accuracy']
+    
+    ax = plt.subplot(211)
+    train, = ax.plot(epochs, train_loss)
+    val, = ax.plot(epochs, val_loss)
+    ax.legend([train, val], ['training', 'validation'])
+    ax.set(xlabel='epochs', ylabel='categorical cross-entropy loss')
+
+    ax2 = plt.subplot(212)
+    train2, = ax2.plot(epochs, train_acc)
+    val2, = ax2.plot(epochs, val_acc)
+    ax2.legend([train2, val2], ['training', 'validation'])
+    ax2.set(xlabel='epochs', ylabel='accuracy')
+
+
+def AlexNet():
+    return Sequential([
+        Conv2D(filters=96, input_shape=(224, 224, 3), kernel_size=(11, 11), strides=(4, 4), padding='same'),
+        BatchNormalization(),
+        Activation('relu'),
+        MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
+        Conv2D(filters=256, kernel_size=(5, 5), strides=(1, 1), padding='same'),
+        BatchNormalization(),
+        Activation('relu'),
+        MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
+        Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), padding='same'),
+        BatchNormalization(),
+        Activation('relu'),
+        Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), padding='same'),
+        BatchNormalization(),
+        Activation('relu'),
+        Conv2D(filters=256, kernel_size=(3, 3), strides=(1, 1), padding='same'),
+        BatchNormalization(),
+        Activation('relu'),
+        MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
+        Flatten(),
+        Dense(4096, input_shape=(224, 224, 3, )),
+        BatchNormalization(),
+        Activation('relu'),
+        Dropout(0.4),
+        Dense(4096),
+        BatchNormalization(),
+        Activation('relu'),
+        Dropout(0.4),
+        Dense(1000),
+        BatchNormalization(),
+        Activation('relu'),
+        Dropout(0.4),
+        Dense(1),
+        BatchNormalization(),
+        Activation('sigmoid'),
         ])

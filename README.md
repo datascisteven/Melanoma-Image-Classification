@@ -111,28 +111,22 @@ PR-AUC plots precision against recall
 │   └── utils.py  			<- py file with self-defined functions
 ├── final_notebook.ipynb        <- final notebook for capstone project
 ├── _data                       <- folder of csv files (csv)
-├── final_presentation.pdf    	<- pdf of the final project presentation
 ├── MVP Presentation.pdf		<- pdf of the MVP presentation
 ├── _images                     <- folder containing visualizations
 ├── _split			<- folder substructure of image folder (not on Github)
 │   ├──	_train				<- folder containing training JPEG files
 │   │	├── _mel					
-│   │	│   ├── _2020
-│   │	│   ├── _2019
-│   │	│   ├── _2018
-│   │	│   └── _aug
 │   │	└──	_not_mel				
 │   ├── _train_dcm			<- folder containing training DICOM files
 │   ├── _val				<- folder containing validation JPEG files
 │   │	├── _mel
 │   │	└── _not_mel					
-│   ├── _test2				<- folder containing test JPEG files
+│   ├── _test				<- folder containing test JPEG files
 │   │	├── _mel
 │   │	└── _not_mel	
 │   └── _train_imb			<- folder containing original JPEG files
 │	├── _mel
 │	└── _not_mel	
-├── _sample			<- folder containing sample dataset of images (not on Github)
 ├── _models			<- folder containing saved models (not on Github)
 └── utils.py			<- py file with self-defined functions
 ```
