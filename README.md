@@ -1,8 +1,8 @@
-# Web or App Implementation of Melanoma Image Classifier
+# Developing a Melanoma Image Classifier for iOS and Android App Deployment
 
-`<img src="images/melanoma_images.png">`
+<img src="images/melanoma_images.png">
 
-`<img src="images/non_melanoma_images.png">`
+<img src="images/non_melanoma_images.png">
 
 ## Overview
 
@@ -25,7 +25,8 @@ As the leading healthcare organization for informatics in medical imaging, the S
 There are three public repositories curated by SIIM-ISCC that we relied on for the project:
 
 **2020 ISIC Training Dataset:**
-- 33,126 DICOM images with embedded metadata and 	JPEG images with 425 duplicates
+
+- 33,126 DICOM images with embedded metadata and JPEG images with 425 duplicates
 - 33,126 metadata entries of patient ID, lesion ID, sex, age, and general anatomic site
 - 33,126 entries of gold standard lesion diagnoses
 
@@ -40,14 +41,16 @@ The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions f
 7. binarized version of target variable (melanoma or not melanoma)
 
 **2019 ISIC Training Dataset:**
+
 - 25,331 JPEG images of skin lesions
 - 25,331 metadata entries of age sex general anatomic site, and common lesion identifier
 - 25,331 entries of gold standard lesion diagnoses
 
 **2017 ISIC Training Dataset:**
+
 - 2000 images in JPEG format and CSV with clinical metadata
 	- 374 images diagnosed as melanoma and 1626 images as other diagnoses lumped into non-melanoma
-- image\_id, age\_approximate, and sex
+- image_id, age_approximate, and sex
 - 2000 entries of gold standard lesion diagnoses
 
 The 2020 training dataset, supplemented with the 2019 melanoma images, form our training and validation datasets at a 80/20 split, and the 2017 training dataset becomes our testing or holdout set.
@@ -55,19 +58,20 @@ The 2020 training dataset, supplemented with the 2019 melanoma images, form our 
 
 ## Data Understanding:
 
-`<img src="images/age_distribution.png">`
+<img src="images/age_distribution.png">
 
 The mean age for melanoma patients is 60, while the mean age for non-melanoma patients is 50.  According to the CDC, the average age of diagnosis is 63.
 
 
-`<img src="images/gender_distribution.png">`
+<img src="images/gender_distribution.png">
 
 There is an unequal distribution in gender of the melanoma patients, predominantly male.  According to the CDC, there is a 60/40 split in the melanoma population for males and females.  Under 50, melanoma occurs more frequently in women, while above 50, occurs more often in men and increasingly so moving into 80.
 
 
-`<img src="images/site_distribution.png">`
+<img src="images/site_distribution.png">
 
 There is no difference in site distribution for melanoma and non-melanoma patients in terms of location.  The most common anatomical site is the torso.
+
 
 
 ## Data Preparation:
@@ -78,6 +82,7 @@ There is no difference in site distribution for melanoma and non-melanoma patien
 - Time consuming process of moving folders 
 - Challenge of incorporating folder
 
+
 **Class Imbalance**
 - Employ a variety of methods to address severe class imbalance
 - Additional Datasets for minority class augmentation:
@@ -86,6 +91,8 @@ There is no difference in site distribution for melanoma and non-melanoma patien
 - Albumentation() transformations
 
 Some of the challenges we faced in the initial phase of the project include learning to manage such a large set of unstructured data and whether to incorporate the use of DICOM files into the project.  DICOM is a specific file format that is specific to the medical industry.  The file contains not only the image file but also the metadata, which consists of patient information, both personal and clinical. We opted not to use the DICOM files because of the enormity of the files.
+
+
 
 ## Modeling and Evaluation:
 
@@ -111,6 +118,7 @@ Some of the challenges we faced in the initial phase of the project include lear
 	- last Dense layer should have unit of 1
 
 **Metrics Used for Analysis:**
+
 - Accuracy
 - Precision (Positive Predictive Value)
 - Recall (True Positive Rate)
