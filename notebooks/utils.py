@@ -20,8 +20,8 @@ def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
     """
 
     f, axs = plt.subplots(2, 3, figsize=(14, 8))
-    axs[0, 0].plot(var.history['accuracy'], label = 'train')
-    axs[0, 0].plot(var.history['val_accuracy'], label = 'validation')
+    axs[0, 0].plot(var.history['acc'], label = 'train')
+    axs[0, 0].plot(var.history['val_acc'], label = 'validation')
     axs[0, 0].set_xlabel('Epoch')
     axs[0, 0].set_ylabel('Accuracy')
     axs[0, 0].legend()
@@ -148,9 +148,9 @@ def train_val_metrics(epochs, model_training):
     epochs = range(1, epochs+1)
     metrics = model_training.history
     train_loss = metrics['loss']
-    train_acc = metrics['accuracy']
+    train_acc = metrics['acc']
     val_loss = metrics['val_loss']
-    val_acc = metrics['val_accuracy']
+    val_acc = metrics['val_acc']
     
     ax = plt.subplot(211)
     train, = ax.plot(epochs, train_loss)
