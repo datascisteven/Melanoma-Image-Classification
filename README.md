@@ -1,8 +1,17 @@
-# Developing a Melanoma Image Classifier for iOS and Android App Deployment
+# Melanoma Image Classification Model for iOS and Android App Deployment
+
+**Project Author:**  Steven Yan
+
+**Project Advisor:**  Justin Tannenbaum
+
+**Presentation Link:** https://prezi.com/view/JoLKnGuw0ZFBYFZra0c3/
+
+Final capstone project for Flatiron School Data Science Online Immersive Program
 
 <img src="images/melanoma_images.png">
 
 <img src="images/non_melanoma_images.png">
+
 
 ## Overview
 
@@ -13,9 +22,11 @@ Skin cancer is the most prevalent type of cancer with melanoma being responsible
 
 Doctors can detect melanomas through visual inspection supplemented by their years of clinical experience, but recent studies have shown that machine learning can detect such lesions through image analysis can be as reliable as if not more than a visit with the dermatologist.  
 
-Deploying an app for public consumption that can screen for potential melanoma will prevent countless avoidable deaths and help stave off unnecessary future medical costs.  The project has also very little overhead for such a maximal effect, the biggest bang for your buck.  Lastly, it will begin to address some of the inherent social inequities in healthcare and equalize access to expert advice for people from every background.   
+Deploying an app for public consumption that can screen for potential melanoma will prevent countless avoidable deaths and help stave off unnecessary future medical costs.  The project has also very little overhead for such a maximal effect, the biggest bang for your buck.  According to the Ameerican Journal of Preventive Medicine, the total yearly cost of skin cancer treatment in the United States is around 5 billion for nonmelanoma skin cancers like BCC and SCC, while melanoma will cost around 3 billion.  
 
-Those very populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers are due to past offenses and some purely cultural.  Creating such an app would allow for access by such individuals and break down some of these initial barriers so that they may receive the care they truly need.
+Lastly, it will begin to address some of the inherent social inequities in healthcare and equalize access to expert advice for people from every background.   According to the American Cancer Society, the 5-year survival rate of African-American patients is 69%, while for Caucasians it is 94%, granted the lifetime risk of getting melanoma is over 20 times higher than for non-Hispanic Caucasians.
+
+What could also explain the difference in the survival rates?  Those very populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers are due to past offenses and some purely cultural.  Creating such an app would allow for access by such individuals and break down some of these initial barriers so that they may receive the care they truly need.
 
 
 ## Data Sources:
@@ -48,6 +59,8 @@ The 2020 dataset contains 33,126 dermatoscopic training images of skin lesions f
 
 **2017 ISIC Training Dataset:**
 
+<img src="images/skin_cancer_types.png">
+
 - 2000 images in JPEG format and CSV with clinical metadata
 	- 374 images diagnosed as melanoma and 1626 images as other diagnoses lumped into non-melanoma
 - image_id, age_approximate, and sex
@@ -73,28 +86,32 @@ There is an unequal distribution in gender of the melanoma patients, predominant
 There is no difference in site distribution for melanoma and non-melanoma patients in terms of location.  The most common anatomical site is the torso.
 
 
+## Project Insights:
 
-## Data Preparation:
+It is my desire to put into words some of the challenges I faced during the project for anyone to attempt neural networks with dataset folders on the scope of 20GB-30GB. My data science buddy was surprised that 50,000 images proved a challenge for my MacBook Pro 2019, but perhaps the images are of extremely high resolutions.  
+
+Some of the time challenges we faced in the initial phase of the project include learning to manage such a large set of unstructured data and whether to incorporate the use of DICOM files into the project.  DICOM is a specific file format that is specific to the medical industry.  The file contains not only the image file but also the metadata, which consists of patient information, both personal and clinical. We opted not to use the DICOM files because of the enormity of the files.
 
 **File and folder management**
-- Challenges with unstructured data
-- Keras requires the data to be organized into training, validation, and testing folders with the classes organized as subfolders to create the testing sets
-- Time consuming process of moving folders 
-- Challenge of incorporating folder
+- Challenges with unstructured data and time consuming process of moving folders required always having multiple processes going at all times in order to attempt to complete everything within time limit
+- Realized that it was imperative that Keras required the data to be organized into training, validation, and testing folders with the classes organized as subfolders for insertion into neural networks
 
+Not until we found more minority class images and employed Albumentations to reproduce an augmentation of every minority class image did we produce any metrics from a model that was able to start distinguishing between the minority and majority class. Justin and I
 
 **Class Imbalance**
-- Employ a variety of methods to address severe class imbalance
-- Additional Datasets for minority class augmentation:
+- Employed a variety of methods to address severe class imbalance
+- Additional datasets for minority class augmentation:
 	- 4522 additional melanoma images from the 2019 Training Dataset
-- ImageDataGenerator() transformations
-- Albumentation() transformations
+- used ImageDataGenerator() transformations originally, but it augments both the minority and majority class randomly, and results did not improve after implementing transformations
+- Albumentation() transformations showed significant difference in performance metrics with particular models
 
-Some of the challenges we faced in the initial phase of the project include learning to manage such a large set of unstructured data and whether to incorporate the use of DICOM files into the project.  DICOM is a specific file format that is specific to the medical industry.  The file contains not only the image file but also the metadata, which consists of patient information, both personal and clinical. We opted not to use the DICOM files because of the enormity of the files.
-
-
+Without any prior knowledge of neural networks, taking time to learn about neural networks was time consuming. The initial phase of modeling was taking a stab in the dark a lot of times, until I landed on a model inspired by VGG16, which was the only model that seemed to work, but without convolutional layers stacked on top of each other. 
 
 ## Modeling and Evaluation:
+
+Using the GPU on my MacBook Pro was prohibitive for me to multitask, so I opted not to pursue that avenue.  I ultimately started using my PC laptop in conjunction with my MacBook, but I wish I got that setup earlier.
+
+My results are produced using a dataset that is 1/10 the size of the original dataset, and running a neural network with early stopping would take more than several hours and without would be an overnight project.
 
 **Baseline Convolutional Neural Network rubric:**
 - `Sequential()`
@@ -125,35 +142,39 @@ Some of the challenges we faced in the initial phase of the project include lear
 - ROC-AUC Score
 - PR-AUC Score
 
-We used 
+**Amazon Web Services**
+
+There was a bit of a learning curve with getting Amazon Web Services up and running.  I was dependent on Amazon to enable specific notebook that was needed, but the customer service do not have technical expertise, so I had to get technical support, but it was time consuming in the final week of my capstone.  So I would encourage looking into that way at the beginning of the project.  Once I started paying for support, they were much quicker to respond, so I upgraded to the Developer account.
+
+To be determined....
 
 ## Folder Structure:
 
 	├── README.md                   <- the top-level README for reviewers of this project
 	├── _notebooks			<- folder containing all the project notebooks
-	│   ├── albumentation.ipynb		<- notebook for displaying augmentations
-	│   ├── EDA.ipynb			<- notebook for dataset understanding and EDA
-	│   ├── folders.ipynb			<- notebook for image folder management
-	│   ├── modeling.ipynb			<- notebook for models with imbalanced dataset
-	│   ├── modeling2.ipynb			<- notebook for models with dataset with augmentations
-	│   ├── pretrained.ipynb		<- notebook for pretrained models
-	│   └── utils.py  			<- py file with self-defined functions
+	│   ├── albumentation.ipynb	<- notebook for displaying augmentations
+	│   ├── EDA.ipynb		<- notebook for dataset understanding and EDA
+	│   ├── folders.ipynb		<- notebook for image folder management
+	│   ├── modeling.ipynb		<- notebook for models with imbalanced dataset
+	│   ├── modeling2.ipynb		<- notebook for models with dataset with augmentations
+	│   ├── pretrained.ipynb	<- notebook for pretrained models
+	│   └── utils.py  		<- py file with self-defined functions
 	├── final_notebook.ipynb        <- final notebook for capstone project
 	├── _data                       <- folder of csv files (csv)
 	├── MVP Presentation.pdf		<- pdf of the MVP presentation
 	├── _images                     <- folder containing visualizations
 	├── _split			<- folder substructure of image folder (not on Github)
-	│   ├──	_train				<- folder containing training JPEG files
+	│   ├──	_train			<- folder containing training JPEG files
 	│   │	├── _mel					
-	│   │	└──	_not_mel				
-	│   ├── _train_dcm			<- folder containing training DICOM files
-	│   ├── _val				<- folder containing validation JPEG files
+	│   │	└── _not_mel				
+	│   ├── _train_dcm		<- folder containing training DICOM files
+	│   ├── _val			<- folder containing validation JPEG files
 	│   │	├── _mel
 	│   │	└── _not_mel					
-	│   ├── _test				<- folder containing test JPEG files
+	│   ├── _test			<- folder containing test JPEG files
 	│   │	├── _mel
 	│   │	└── _not_mel	
-	│   └── _train_imb			<- folder containing original JPEG files
+	│   └── _train_imb		<- folder containing original JPEG files
 	│	├── _mel
 	│	└── _not_mel	
 	├── _models			<- folder containing saved models (not on Github)
