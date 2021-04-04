@@ -1,4 +1,4 @@
-# Melanoma Image Classification Model for iOS and Android App Deployment
+# Melanoma Image Classification Model for App Deployment
 
 **Project Author:**  Steven Yan
 
