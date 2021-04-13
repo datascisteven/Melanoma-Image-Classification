@@ -137,20 +137,20 @@ def create_model(input_shape):
 
 def cnn(input_shape):
     return Sequential([
-        Conv2D(filters=32, kernel_size=(3, 3), activation='relu', padding='same', input_shape=input_shape),
+        Conv2D(filters=16, kernel_size=(3, 3), activation='relu', padding='same', input_shape=input_shape),
         Dropout(0.2),
         MaxPool2D(pool_size=(3, 3)),
+        Conv2D(filters=32, kernel_size=(3, 3), activation='relu', padding='same'),
+        Dropout(0.2),
+        MaxPool2D(pool_size=(2, 2)),
         Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same'),
         Dropout(0.2),
         MaxPool2D(pool_size=(2, 2)),
         Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'),
-        Dropout(0.2),
-        MaxPool2D(pool_size=(2, 2)),
-        Conv2D(filters=256, kernel_size=(3, 3), activation='relu', padding='same'),
         Dropout(0.2), 
         MaxPool2D(pool_size=(2, 2)),
         Flatten(),
-        Dense(units=128, activation='relu'),
+ #       Dense(units=128, activation='relu'),
         Dropout(0.25),     
         Dense(units=1, activation='sigmoid')
         ])
