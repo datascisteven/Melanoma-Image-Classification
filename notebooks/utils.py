@@ -150,7 +150,7 @@ def cnn(input_shape):
         Dropout(0.2), 
         MaxPool2D(pool_size=(2, 2)),
         Flatten(),
- #       Dense(units=128, activation='relu'),
+        Dense(units=128, activation='relu'),
         Dropout(0.25),     
         Dense(units=1, activation='sigmoid')
         ])
