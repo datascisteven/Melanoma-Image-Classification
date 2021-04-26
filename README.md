@@ -113,7 +113,7 @@ Using the GPU on my MacBook Pro was prohibitive for me to multitask, so I opted 
 
 My results are produced using a dataset that is 1/10 the size of the original dataset, and running a neural network with early stopping would take more than several hours and without would be an overnight project.
 
-**Baseline Convolutional Neural Network rubric:**
+**Final Convolutional Neural Network rubric:**
 - `Sequential()`
 - 4 convolutional layers with input shape (256, 256, 3) with filters applied to extract different features:
 	- filters: number of filters that convolutional layer will learn
@@ -121,26 +121,33 @@ My results are produced using a dataset that is 1/10 the size of the original da
 	- padding:  `same` ensure that spatial dimensions are the same after convolution
 	- activation:  activation function that will be applied for convolutional layers, use `relu`
 	- `layers.Conv2D(input_shape=(224,224,3), filters=64, kernel_size=(3,3), padding="same", activation="relu"))`
-- `BatchNormalization()`
-	- acts like standardization or normalization for regression models
-- `MaxPool2D()` 
+- `Dropout(0.2)`
+	- prevents model from overfitting since some number of layer outputs are randomly ignored or “dropped out"
+- `MaxPooling2D()` 
 	- To reduce dimensionality of images by reducing number of pixels in output
 	- `layers.MaxPool2D(pool_size=(2,2))`
 - `Flatten()`
 	- To be able to generate a prediction, flatten output of convolutional base
 	- `layers.Flatten()`
-- Dense layers feeds output of convolutional base to neurons
+- `Dense` layers feeds output of convolutional base to neurons
 	- `layers.Dense(units=4096, activation="relu"))`
 	- Loss function: for binary classification \`loss= ‘binary\_crossentropy’
-	- last Dense layer should have unit of 1
+	- last Dense layer should have unit of 1 and sigmoid as activation
 
-**Metrics Used for Analysis:**
+**Metrics Used for Evaluating Model:**
 
 - Accuracy
 - Precision (Positive Predictive Value)
 - Recall (True Positive Rate)
 - ROC-AUC Score
 - PR-AUC Score
+
+**Results**
+
+One of my best models is a convolutional neural netwrok created from scratch, through trial and error, and changed through content reading and advice from advisors.  The model was able to distinguish between the two classes very well by achieving above 90% in the 5 above metrics, and ultimately achieved a 94% accuracy.  Here is the confusion matrix:
+
+<img src="images/cnn2_cf.png">
+
 
 **Amazon Web Services**
 
