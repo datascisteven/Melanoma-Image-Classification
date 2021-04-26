@@ -76,7 +76,6 @@ def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
     f.tight_layout(h_pad=5, w_pad=5)
 
 
-
 def make_confusion_matrix(y, y_pred):
     cnf = confusion_matrix(y, y_pred)
     group_names = ['TN','FP','FN','TP']
@@ -134,52 +133,6 @@ def create_model(input_shape):
         Dense(units=1, activation='sigmoid')
         ])
 
-
-def cnn(input_shape):
-    return Sequential([
-        Conv2D(filters=16, kernel_size=(3, 3), activation='relu', padding='same', input_shape=input_shape),
-        Dropout(0.2),
-        MaxPool2D(pool_size=(3, 3)),
-        Conv2D(filters=32, kernel_size=(3, 3), activation='relu', padding='same'),
-        Dropout(0.2),
-        MaxPool2D(pool_size=(2, 2)),
-        Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same'),
-        Dropout(0.2),
-        MaxPool2D(pool_size=(2, 2)),
-        Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'),
-        Dropout(0.2), 
-        MaxPool2D(pool_size=(2, 2)),
-        Flatten(),
-        Dense(units=128, activation='relu'),
-        Dropout(0.25),     
-        Dense(units=1, activation='sigmoid')
-        ])
-
-
-def AlexNet():
-    return Sequential([
-        Conv2D(filters=96, input_shape=(227, 227, 3), kernel_size=(11, 11), strides=(4, 4), activation='relu', padding='same'),
-        BatchNormalization(),
-        MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
-        Conv2D(filters=256, kernel_size=(5, 5), strides=(1, 1), activation = 'relu', padding='same'),
-        BatchNormalization(),
-        MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
-        Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), activation = 'relu', padding='same'),
-        BatchNormalization(),
-        Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), activation = 'relu', padding='same'),
-        BatchNormalization(),
-        Conv2D(filters=256, kernel_size=(3, 3), strides=(1, 1), activation = 'relu', padding='same'),
-        BatchNormalization(),
-        MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
-        Flatten(),
-        Dense(4096, activation = 'relu'),
-        Dropout(0.4),
-        Dense(4096, activation = 'relu'),
-        Dropout(0.4),
-        Dense(1000, activation = 'relu'),
-        Dropout(0.4),
-        Dense(1, activation = 'sigmoid')
-        ])
 
 
 ## courtesy of flaboss on Github
@@ -343,3 +296,38 @@ def __smpl_size(population, size):
     elif size >= 1:
         n = size
     return n
+
+
+
+import itertools
+
+def draw_confusion_matrix(cm, classes, normalize=True, title='Confusion matrix', cmap=plt.cm.Blues):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    plt.figure(figsize=(10,10))
+
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        cm = np.around(cm, decimals=2)
+        cm[np.isnan(cm)] = 0.0
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion matrix, without normalization')
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, cm[i, j],
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] > thresh else "black")
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
