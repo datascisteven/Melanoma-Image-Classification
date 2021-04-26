@@ -111,7 +111,8 @@ Without any prior knowledge of neural networks, taking time to learn about neura
 
 Using the GPU on my MacBook Pro was prohibitive for me to multitask, so I opted not to pursue that avenue.  I ultimately started using my PC laptop in conjunction with my MacBook, but I wish I got that setup earlier.
 
-My results are produced using a dataset that is 1/10 the size of the original dataset, and running a neural network with early stopping would take more than several hours and without would be an overnight project.
+My results are produced using a dataset that is 1/5 the size of the original dataset, and each epoch could take anywhere from 30 minutes to 90 minutes depending on the complexity of the model and the chosen parameters. By lowering batch size, adding Dropout layers, removing some convolutional layers, and using EarlyStopping callback allowed me to finally to play around with different parameters and different models.
+
 
 **Final Convolutional Neural Network rubric:**
 - `Sequential()`
@@ -153,6 +154,8 @@ One of my best models is a convolutional neural netwrok created from scratch, th
 
 There was a bit of a learning curve with getting Amazon Web Services up and running.  I was dependent on Amazon to enable specific notebook that was needed, but the customer service do not have technical expertise, so I had to get technical support, but it was time consuming in the final week of my capstone.  So I would encourage looking into that way at the beginning of the project.  Once I started paying for support, they were much quicker to respond, so I upgraded to the Developer account.
 
+Ultimately, to run a model with the full dataset in a timely manner, you will need to run an Amaazon Sagemaker instance.
+
 To be determined....
 
 ## Folder Structure:
@@ -162,13 +165,13 @@ To be determined....
 	│   ├── albumentation.ipynb	<- notebook for displaying augmentations
 	│   ├── EDA.ipynb		<- notebook for dataset understanding and EDA
 	│   ├── folders.ipynb		<- notebook for image folder management
-	│   ├── modeling.ipynb		<- notebook for models with imbalanced dataset
-	│   ├── modeling2.ipynb		<- notebook for models with dataset with augmentations
+	│   ├── preaugmentation.ipynb	<- notebook for models with imbalanced dataset
+	│   ├── postaugmentation.ipynb	<- notebook for models with dataset post-augmentations
 	│   ├── pretrained.ipynb	<- notebook for pretrained models
 	│   └── utils.py  		<- py file with self-defined functions
 	├── final_notebook.ipynb        <- final notebook for capstone project
 	├── _data                       <- folder of csv files (csv)
-	├── MVP Presentation.pdf		<- pdf of the MVP presentation
+	├── MVP Presentation.pdf	<- pdf of the MVP presentation
 	├── _images                     <- folder containing visualizations
 	├── _split			<- folder substructure of image folder (not on Github)
 	│   ├──	_train			<- folder containing training JPEG files
@@ -184,7 +187,6 @@ To be determined....
 	│   └── _train_imb		<- folder containing original JPEG files
 	│	├── _mel
 	│	└── _not_mel	
-	├── _models			<- folder containing saved models (not on Github)
 	└── utils.py			<- py file with self-defined functions
 
 ## Contact Information:
@@ -192,10 +194,8 @@ To be determined....
 **Steven Yan**
 
 Email:  [stevenyan@uchicago.edu][1]
-
-LinkedIn:   [https://www.linkedin.com/in/examsherpa][2]
-
-Github:  [https://www.github.com/examsherpa][3]
+LinkedIn:   [https://www.linkedin.com/in/datascisteven][2]
+Github:  [https://www.github.com/datascisteven][3]
 
 
 
@@ -221,8 +221,8 @@ Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection 2018: A C
 
 
 [1]:	mailto:stevenyan@uchicago.edu
-[2]:	https://www.linkedin.com/in/examsherpa
-[3]:	https://www.github.com/examsherpa
+[2]:	https://www.linkedin.com/in/datascisteven
+[3]:	https://www.github.com/datascisteven
 [4]:	https://doi.org/10.34970/2020-ds01
 [6]:	https://doi.org/10.1038/sdata.2018.161
 [7]:	https://arxiv.org/abs/1710.05006
