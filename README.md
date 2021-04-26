@@ -193,9 +193,11 @@ To be determined....
 
 **Steven Yan**
 
-Email:  [stevenyan@uchicago.edu][1]
-LinkedIn:   [https://www.linkedin.com/in/datascisteven][2]
-Github:  [https://www.github.com/datascisteven][3]
+<img src="images/mail_icon.jpeg"> Email:  [stevenyan@uchicago.edu][1]
+
+<img src="images/linkedin_icon.png"> LinkedIn:   [https://www.linkedin.com/in/datascisteven][2]
+
+<img src="images/github_icon.jpeg"> Github:  [https://www.github.com/datascisteven][3]
 
 
 
