@@ -111,9 +111,10 @@ Without any prior knowledge of neural networks, taking time to learn about neura
 
 Using the GPU on my MacBook Pro was prohibitive for me to multitask, so I opted not to pursue that avenue.  I ultimately started using my PC laptop in conjunction with my MacBook, but I wish I got that setup earlier.
 
-My results are produced using a dataset that is 1/10 the size of the original dataset, and running a neural network with early stopping would take more than several hours and without would be an overnight project.
+My results are produced using a dataset that is 1/5 the size of the original dataset, and each epoch could take anywhere from 30 minutes to 90 minutes depending on the complexity of the model and the chosen parameters. By lowering batch size, adding Dropout layers, removing some convolutional layers, and using EarlyStopping callback allowed me to finally to play around with different parameters and different models.
 
-**Baseline Convolutional Neural Network rubric:**
+
+**Final Convolutional Neural Network rubric:**
 - `Sequential()`
 - 4 convolutional layers with input shape (256, 256, 3) with filters applied to extract different features:
 	- filters: number of filters that convolutional layer will learn
@@ -121,20 +122,20 @@ My results are produced using a dataset that is 1/10 the size of the original da
 	- padding:  `same` ensure that spatial dimensions are the same after convolution
 	- activation:  activation function that will be applied for convolutional layers, use `relu`
 	- `layers.Conv2D(input_shape=(224,224,3), filters=64, kernel_size=(3,3), padding="same", activation="relu"))`
-- `BatchNormalization()`
-	- acts like standardization or normalization for regression models
-- `MaxPool2D()` 
+- `Dropout(0.2)`
+	- prevents model from overfitting since some number of layer outputs are randomly ignored or “dropped out"
+- `MaxPooling2D()` 
 	- To reduce dimensionality of images by reducing number of pixels in output
 	- `layers.MaxPool2D(pool_size=(2,2))`
 - `Flatten()`
 	- To be able to generate a prediction, flatten output of convolutional base
 	- `layers.Flatten()`
-- Dense layers feeds output of convolutional base to neurons
+- `Dense` layers feeds output of convolutional base to neurons
 	- `layers.Dense(units=4096, activation="relu"))`
 	- Loss function: for binary classification \`loss= ‘binary\_crossentropy’
-	- last Dense layer should have unit of 1
+	- last Dense layer should have unit of 1 and sigmoid as activation
 
-**Metrics Used for Analysis:**
+**Metrics Used for Evaluating Model:**
 
 - Accuracy
 - Precision (Positive Predictive Value)
@@ -142,9 +143,18 @@ My results are produced using a dataset that is 1/10 the size of the original da
 - ROC-AUC Score
 - PR-AUC Score
 
+**Results**
+
+One of my best models is a convolutional neural netwrok created from scratch, through trial and error, and changed through content reading and advice from advisors.  The model was able to distinguish between the two classes very well by achieving above 90% in the 5 above metrics, and ultimately achieved a 94% accuracy.  Here is the confusion matrix:
+
+<img src="images/cnn2_cf.png">
+
+
 **Amazon Web Services**
 
 There was a bit of a learning curve with getting Amazon Web Services up and running.  I was dependent on Amazon to enable specific notebook that was needed, but the customer service do not have technical expertise, so I had to get technical support, but it was time consuming in the final week of my capstone.  So I would encourage looking into that way at the beginning of the project.  Once I started paying for support, they were much quicker to respond, so I upgraded to the Developer account.
+
+Ultimately, to run a model with the full dataset in a timely manner, you will need to run an Amaazon Sagemaker instance.
 
 To be determined....
 
@@ -155,13 +165,13 @@ To be determined....
 	│   ├── albumentation.ipynb	<- notebook for displaying augmentations
 	│   ├── EDA.ipynb		<- notebook for dataset understanding and EDA
 	│   ├── folders.ipynb		<- notebook for image folder management
-	│   ├── modeling.ipynb		<- notebook for models with imbalanced dataset
-	│   ├── modeling2.ipynb		<- notebook for models with dataset with augmentations
+	│   ├── preaugmentation.ipynb	<- notebook for models with imbalanced dataset
+	│   ├── postaugmentation.ipynb	<- notebook for models with dataset post-augmentations
 	│   ├── pretrained.ipynb	<- notebook for pretrained models
 	│   └── utils.py  		<- py file with self-defined functions
 	├── final_notebook.ipynb        <- final notebook for capstone project
 	├── _data                       <- folder of csv files (csv)
-	├── MVP Presentation.pdf		<- pdf of the MVP presentation
+	├── MVP Presentation.pdf	<- pdf of the MVP presentation
 	├── _images                     <- folder containing visualizations
 	├── _split			<- folder substructure of image folder (not on Github)
 	│   ├──	_train			<- folder containing training JPEG files
@@ -177,18 +187,17 @@ To be determined....
 	│   └── _train_imb		<- folder containing original JPEG files
 	│	├── _mel
 	│	└── _not_mel	
-	├── _models			<- folder containing saved models (not on Github)
 	└── utils.py			<- py file with self-defined functions
 
 ## Contact Information:
 
 **Steven Yan**
 
-Email:  [stevenyan@uchicago.edu][1]
+<img src="images/mail_icon.png"> Email:  [stevenyan@uchicago.edu][1]
 
-LinkedIn:   [https://www.linkedin.com/in/examsherpa][2]
+<img src="images/linkedin_icon.png"> LinkedIn:   [https://www.linkedin.com/in/datascisteven][2]
 
-Github:  [https://www.github.com/examsherpa][3]
+<img src="images/github_icon.png"> Github:  [https://www.github.com/datascisteven][3]
 
 
 
@@ -214,8 +223,8 @@ Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection 2018: A C
 
 
 [1]:	mailto:stevenyan@uchicago.edu
-[2]:	https://www.linkedin.com/in/examsherpa
-[3]:	https://www.github.com/examsherpa
+[2]:	https://www.linkedin.com/in/datascisteven
+[3]:	https://www.github.com/datascisteven
 [4]:	https://doi.org/10.34970/2020-ds01
 [6]:	https://doi.org/10.1038/sdata.2018.161
 [7]:	https://arxiv.org/abs/1710.05006
