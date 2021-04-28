@@ -10,19 +10,6 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization, Conv2D, MaxPool2D, MaxPooling2D
 
 
-def barplot(plot, feature, titlename):
-    total = len(feature)
-    f = plt.figure(figsize= (7,5))
-    f = sns.countplot(x='target', data=train)
-    plt.title(titlename)
-    for p in plot.patches:
-        percentage = '{:.1f}%'.format(100 * p.get_height()/total)
-        x = p.get_x() + p.get_width() / 2 - 0.05
-        y = p.get_y() + p.get_height()
-        ax.annotate(percentage, (x, y), size = 12)
-    plt.show()
-
-
 def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
     """
         Function to produce the plots for accuracy, ROC-AUC, PR-AUC, recall, precision, and loss scores for the training and validation sets
@@ -105,34 +92,6 @@ def train_val_metrics(epochs, model_training):
     val2, = ax2.plot(epochs, val_acc)
     ax2.legend([train2, val2], ['training', 'validation'])
     ax2.set(xlabel='epochs', ylabel='accuracy')
-
-def create_model(input_shape):
-    return Sequential([
-        Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same', input_shape=input_shape),
-        Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same'),
-        BatchNormalization(),
-        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
-        Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'),
-        Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'),
-        BatchNormalization(),
-        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
-        Conv2D(filters=256, kernel_size=(3, 3), activation='relu', padding='same'),
-        Conv2D(filters=256, kernel_size=(3, 3), activation='relu', padding='same'),
-        BatchNormalization(),
-        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),   
-        Conv2D(filters=512, kernel_size=(3, 3), activation='relu', padding='same'),
-        Conv2D(filters=512, kernel_size=(3, 3), activation='relu', padding='same'),  
-        BatchNormalization(),
-        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),   
-        Conv2D(filters=512, kernel_size=(3, 3), activation='relu', padding='same'), 
-        Conv2D(filters=512, kernel_size=(3, 3), activation='relu', padding='same'),
-        BatchNormalization(),
-        MaxPool2D(pool_size=(2, 2), strides=(2, 2)),   
-        Flatten(),
-        Dense(units=4096, activation='relu'),
-        Dense(units=1, activation='sigmoid')
-        ])
-
 
 
 ## courtesy of flaboss on Github
