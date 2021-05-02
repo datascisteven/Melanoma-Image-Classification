@@ -126,3 +126,5 @@ dmypy.json
 /jpegs
 /logs
 /logs/*
+/flutter
+
