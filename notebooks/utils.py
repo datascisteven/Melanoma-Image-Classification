@@ -12,7 +12,8 @@ from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization
 
 def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
     """
-        Function to produce the plots for accuracy, ROC-AUC, PR-AUC, recall, precision, and loss scores for the training and validation sets
+        Function to produce the plots for all the 6  metrics measured during training as specified in compiling the model:
+            accuracy, ROC-AUC, PR-AUC, recall, precision, and loss
         `var` is the variable that we set `model.fit` or `model.fit_generator`
         `auc`, `pr_auc`, `rec`, `prec`, etc. must be strings with quotes, i.e. `'auc_4'` or `'precision_8'`
     """
@@ -62,51 +63,51 @@ def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
 
     f.tight_layout(h_pad=5, w_pad=5)
 
-def sixplot2(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
+def sixplot2(df, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
     """
-        Function to produce the plots for accuracy, ROC-AUC, PR-AUC, recall, precision, and loss scores for the training and validation sets
-        `var` is the variable that we set `model.fit` or `model.fit_generator`
+        Function (after uploading from dataframe from CSVLogger) to produce the plots for the training metrics
+        `df` is the variable that we set `model.fit` or `model.fit_generator`
         `auc`, `pr_auc`, `rec`, `prec`, etc. must be strings with quotes, i.e. `'auc_4'` or `'precision_8'`
     """
 
     f, axs = plt.subplots(2, 3, figsize=(14, 8))
-    axs[0, 0].plot(var['accuracy'], label = 'train')
-    axs[0, 0].plot(var['val_accuracy'], label = 'validation')
+    axs[0, 0].plot(df['accuracy'], label = 'train')
+    axs[0, 0].plot(df['val_accuracy'], label = 'validation')
     axs[0, 0].set_xlabel('Epoch')
     axs[0, 0].set_ylabel('Accuracy')
     axs[0, 0].legend()
     axs[0, 0].set_title('Accuracy Scores')
     
-    axs[0, 1].plot(var[auc], label = 'train')
-    axs[0, 1].plot(var[v_auc], label = 'validation')
+    axs[0, 1].plot(df[auc], label = 'train')
+    axs[0, 1].plot(df[v_auc], label = 'validation')
     axs[0, 1].set_xlabel('Epoch')
     axs[0, 1].set_ylabel('ROC-AUC')
     axs[0, 1].legend()
     axs[0, 1].set_title('ROC/AUC Scores')
     
-    axs[0, 2].plot(var[pr_auc], label = 'train')
-    axs[0, 2].plot(var[v_pr_auc], label = 'validation')
+    axs[0, 2].plot(df[pr_auc], label = 'train')
+    axs[0, 2].plot(df[v_pr_auc], label = 'validation')
     axs[0, 2].set_xlabel('Epoch')
     axs[0, 2].set_ylabel('PR-AUC')
     axs[0, 2].legend()
     axs[0, 2].set_title('PR/AUC Scores')
     
-    axs[1, 0].plot(var[prec], label = 'train')
-    axs[1, 0].plot(var[v_prec], label = 'validation')
+    axs[1, 0].plot(df[prec], label = 'train')
+    axs[1, 0].plot(df[v_prec], label = 'validation')
     axs[1, 0].set_xlabel('Epoch')
     axs[1, 0].set_ylabel('Precision')
     axs[1, 0].legend()
     axs[1, 0].set_title('Precision Scores')
     
-    axs[1, 1].plot(var[rec], label = 'train')
-    axs[1, 1].plot(var[v_rec], label = 'validation')
+    axs[1, 1].plot(df[rec], label = 'train')
+    axs[1, 1].plot(df[v_rec], label = 'validation')
     axs[1, 1].set_xlabel('Epoch')
     axs[1, 1].set_ylabel('Recall')
     axs[1, 1].legend()
     axs[1, 1].set_title('Recall Scores')
     
-    axs[1, 2].plot(var['loss'], label = 'train')
-    axs[1, 2].plot(var['val_loss'], label = 'validation')
+    axs[1, 2].plot(df['loss'], label = 'train')
+    axs[1, 2].plot(df['val_loss'], label = 'validation')
     axs[1, 2].set_xlabel('Epoch')
     axs[1, 2].set_ylabel('Loss')
     axs[1, 2].legend()
@@ -124,107 +125,42 @@ def make_confusion_matrix(y, y_pred):
     labels = np.asarray(labels).reshape(2,2)
     sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':16})
 
-def make_confusion_matrix_2(cf,
+def make_confusion_matrix_3(y, y_pred):
+    cnf = confusion_matrix(y, y_pred)
+    group_names = ['TP','FN','FP','TN']
+    group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
+    group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
+    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
+    labels = np.asarray(labels).reshape(2,2)
+    sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':16})
+
+def draw_confusion_matrix(cf,
                           group_names=None,
-                          categories='auto',
-                          count=True,
-                          percent=True,
-                          cbar=True,
-                          xyticks=True,
-                          xyplotlabels=True,
-                          sum_stats=True,
                           figsize=None,
-                          cmap='Blues',
                           title=None):
-    '''
-    This function will make a pretty plot of an sklearn Confusion Matrix cm using a Seaborn heatmap visualization.
-    Arguments
-    ---------
-    cf:            confusion matrix to be passed in
-    group_names:   List of strings that represent the labels row by row to be shown in each square.
-    categories:    List of strings containing the categories to be displayed on the x,y axis. Default is 'auto'
-    count:         If True, show the raw number in the confusion matrix. Default is True.
-    normalize:     If True, show the proportions for each category. Default is True.
-    cbar:          If True, show the color bar. The cbar values are based off the values in the confusion matrix.
-                   Default is True.
-    xyticks:       If True, show x and y ticks. Default is True.
-    xyplotlabels:  If True, show 'True Label' and 'Predicted Label' on the figure. Default is True.
-    sum_stats:     If True, display summary statistics below the figure. Default is True.
-    figsize:       Tuple representing the figure size. Default will be the matplotlib rcParams value.
-    cmap:          Colormap of the values displayed from matplotlib.pyplot.cm. Default is 'Blues'
-                   See http://matplotlib.org/examples/color/colormaps_reference.html
-                   
-    title:         Title for the heatmap. Default is None.
-    '''
 
-
-    # CODE TO GENERATE TEXT INSIDE EACH SQUARE
-    blanks = ['' for i in range(cf.size)]
-
-    if group_names and len(group_names)==cf.size:
-        group_labels = ["{}\n".format(value) for value in group_names]
-    else:
-        group_labels = blanks
-
-    if count:
-        group_counts = ["{0:0.0f}\n".format(value) for value in cf.flatten()]
-    else:
-        group_counts = blanks
-
-    if percent:
-        group_percentages = ["{0:.2%}".format(value) for value in cf.flatten()/np.sum(cf)]
-    else:
-        group_percentages = blanks
-
+    group_labels = ["{}\n".format(value) for value in group_names]
+    group_counts = ["{0:0.0f}\n".format(value) for value in cf.flatten()]
+    group_percentages = ["{0:.2%}".format(value) for value in cf.flatten()/np.sum(cf)]
     box_labels = [f"{v1}{v2}{v3}".strip() for v1, v2, v3 in zip(group_labels,group_counts,group_percentages)]
     box_labels = np.asarray(box_labels).reshape(cf.shape[0],cf.shape[1])
 
+    accuracy  = np.trace(cf) / float(np.sum(cf))
+    precision = cf[1,1] / sum(cf[:,1])
+    recall    = cf[1,1] / sum(cf[1,:])
+    f1_score  = 2*precision*recall / (precision + recall)
+    stats_text = "\n\nAccuracy={:0.3f}\nPrecision={:0.3f}\nRecall={:0.3f}\nF1 Score={:0.3f}".format(
+                accuracy, precision, recall, f1_score)
 
-    # CODE TO GENERATE SUMMARY STATISTICS & TEXT FOR SUMMARY STATS
-    if sum_stats:
-        #Accuracy is sum of diagonal divided by total observations
-        accuracy  = np.trace(cf) / float(np.sum(cf))
-
-        #if it is a binary confusion matrix, show some more stats
-        if len(cf)==2:
-            #Metrics for Binary Confusion Matrices
-            precision = cf[1,1] / sum(cf[:,1])
-            recall    = cf[1,1] / sum(cf[1,:])
-            f1_score  = 2*precision*recall / (precision + recall)
-            pr_auc = auc(recall, precision)
-            stats_text = "\n\nAccuracy={:0.3f}\nPrecision={:0.3f}\nRecall={:0.3f}\nF1 Score={:0.3f}".format(
-                accuracy,precision,recall,f1_score)
-        else:
-            stats_text = "\n\nAccuracy={:0.3f}".format(accuracy)
-    else:
-        stats_text = ""
-
-
-    # SET FIGURE PARAMETERS ACCORDING TO OTHER ARGUMENTS
-    if figsize==None:
-        #Get default figure size if not set
-        figsize = plt.rcParams.get('figure.figsize')
-
-    if xyticks==False:
-        #Do not show categories if xyticks is False
-        categories=False
-
-
-    # MAKE THE HEATMAP VISUALIZATION
     plt.figure(figsize=figsize)
-    sns.heatmap(cf,annot=box_labels,fmt="",cmap=cmap,cbar=cbar,xticklabels=categories,yticklabels=categories)
-
-    if xyplotlabels:
-        plt.ylabel('True label')
-        plt.xlabel('Predicted label' + stats_text)
-    else:
-        plt.xlabel(stats_text)
-    
-    if title:
-        plt.title(title)
+    sns.heatmap(cf, annot=box_labels, fmt="", cmap='Blues', cbar=False, annot_kws={'size':16})
+    plt.xlabel(stats_text, fontsize=16)
+    plt.title(title, fontsize=16)
 
 
 def train_val_metrics(epochs, model_training):
+    """
+        Function to produce loss and validation 
     epochs = range(1, epochs+1)
     metrics = model_training.history
     train_loss = metrics['loss']
@@ -430,38 +366,3 @@ def __smpl_size(population, size):
     elif size >= 1:
         n = size
     return n
-
-
-
-import itertools
-
-def draw_confusion_matrix(cm, classes, normalize=True, title='Confusion matrix', cmap=plt.cm.Blues):
-    """
-    This function prints and plots the confusion matrix.
-    Normalization can be applied by setting `normalize=True`.
-    """
-    plt.figure(figsize=(10,10))
-
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
-    plt.colorbar()
-
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
-
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        cm = np.around(cm, decimals=2)
-        cm[np.isnan(cm)] = 0.0
-        print("Normalized confusion matrix")
-    else:
-        print('Confusion matrix, without normalization')
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, cm[i, j],
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
-    plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
