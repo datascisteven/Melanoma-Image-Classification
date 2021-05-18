@@ -160,7 +160,10 @@ def draw_confusion_matrix(cf,
 
 def train_val_metrics(epochs, model_training):
     """
-        Function to produce loss and validation 
+        Function to produce loss and validation graphs after training
+        epochs is the number of epochs specified during model training, model+training is the name of rhis  
+    """    
+
     epochs = range(1, epochs+1)
     metrics = model_training.history
     train_loss = metrics['loss']
