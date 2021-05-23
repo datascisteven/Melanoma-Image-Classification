@@ -119,6 +119,9 @@ dmypy.json
 # .DS_store
 .DS_Store
 
+# .vscode
+.vscode
+
 # additional code folder
 /extra
 /sample
