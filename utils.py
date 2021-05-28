@@ -117,7 +117,7 @@ def sixplot2(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
 
 def make_confusion_matrix(y, y_pred):
     cnf = confusion_matrix(y, y_pred)
-    group_names = ['TP','FN','FP','TN']
+    group_names = ['TN','FP','FN','TP']
     group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
     group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
     labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
