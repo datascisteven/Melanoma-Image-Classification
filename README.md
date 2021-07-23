@@ -146,7 +146,7 @@ I also ran the following transfer learning models on the dataset:
 
 ## Evaluation:
 
-In handling imbalanced There were the metrics I monitored in the training process:
+In handling imbalanced datasets, these were the metrics I monitored in the training process:
 
 - Accuracy
 - Precision (Positive Predictive Value)
@@ -174,47 +174,44 @@ Here is the confusion matrix:
 ## Folder Structure:
 
 	├── README.md                   <- the top-level README for reviewers of this project
-	├── _notebooks			<- folder containing all the project notebooks
-	│   ├── albumentation.ipynb	<- notebook for displaying augmentations
-	│   ├── EDA.ipynb		<- notebook for dataset understanding and EDA
-	│   ├── folders.ipynb		<- notebook for image folder management
+	├── _notebooks					<- folder containing all the project notebooks
+	│   ├── albumentation.ipynb		<- notebook for displaying augmentations
+	│   ├── EDA.ipynb				<- notebook for dataset understanding and EDA
+	│   ├── folders.ipynb			<- notebook for image folder management
 	│   ├── preaugmentation.ipynb	<- notebook for models with imbalanced dataset
 	│   ├── postaugmentation.ipynb	<- notebook for models with dataset post-augmentations
-	│   ├── pretrained.ipynb	<- notebook for pretrained models
-	│   └── utils.py  		<- py file with self-defined functions
+	│   ├── pretrained.ipynb		<- notebook for pretrained models
+	│   └── utils.py  				<- py file with self-defined functions
 	├── final_notebook.ipynb        <- final notebook for capstone project
 	├── _data                       <- folder of csv files (csv)
-	├── MVP Presentation.pdf	<- pdf of the MVP presentation
+	├── MVP Presentation.pdf		<- pdf of the MVP presentation
 	├── _images                     <- folder containing visualizations
-	├── _split			<- folder substructure of image folder (not on Github)
-	│   ├──	_train			<- folder containing training JPEG files
+	├── _split						<- folder substructure of image folder (not on Github)
+	│   ├──	_train					<- folder containing training JPEG files
 	│   │	├── _mel					
 	│   │	└── _not_mel				
-	│   ├── _train_dcm		<- folder containing training DICOM files
-	│   ├── _val			<- folder containing validation JPEG files
+	│   ├── _train_dcm				<- folder containing training DICOM files
+	│   ├── _val					<- folder containing validation JPEG files
 	│   │	├── _mel
 	│   │	└── _not_mel					
-	│   ├── _test			<- folder containing test JPEG files
+	│   ├── _test					<- folder containing test JPEG files
 	│   │	├── _mel
 	│   │	└── _not_mel	
-	│   └── _train_imb		<- folder containing original JPEG files
+	│   └── _train_imb				<- folder containing original JPEG files
 	│	├── _mel
 	│	└── _not_mel	
-	└── utils.py			<- py file with self-defined functions
+	└── utils.py					<- py file with self-defined functions
 
 
 ## Contact Information:
 
 **Steven Yan**
 
-
-
 <img src="images/mail_icon.png"> Email:  [stevenyan@uchicago.edu][1]
 
 <img src="images/linkedin_icon.png"> LinkedIn:   [https://www.linkedin.com/in/datascisteven][2]
 
 <img src="images/github_icon.png"> Github:  [https://www.github.com/datascisteven][3]
-
 
 
 ## References:
