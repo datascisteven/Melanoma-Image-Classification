@@ -4,9 +4,9 @@
 
 **Presentation Link:** https://prezi.com/view/JoLKnGuw0ZFBYFZra0c3/
 
-<img src="images/melanoma_images.png">
+<center><img src="images/melanoma_images.png"></center>
 
-<img src="images/non_melanoma_images.png">
+<center><img src="images/non_melanoma_images.png"></center>
 
 
 ## Overview
@@ -160,12 +160,19 @@ I evaluated each model on three testing datasets, the sampled testing set, and t
 
 I had created two main holdout sets for testing, one from the original combined dataset and another from the ISIC 2017 dataset.
 
+<img src="images/metrics.png">
+
+<img src="images/metrics2.png">
+
+
 All the models performed well with the holdout set from the original dataset with around 93% accuracy, but the VGG16-based CNN model achieved a 94.5% accuracy.  On the additional holdout set, the models for the most part achieved a mere 60-70% accuracy, and only ResNet50 achieved a 80% accuracy.  ResNet50 achieved a 90% accuracy on the original holdout set.
 
 
+<div>
 <img src="images/cf_resnet.png" width='300' />
 <img src="images/cf_resnet_1.png" width='300' style="float:left" />
-
+</div>
+</br>
 
 However, what is concerning is that the large number of false negatives for ResNet50 on the additional holdout set.  Despite the model having 80% accuracy, 78% of it is accounted for by the true negatives and only a very small part of the True Positives.
 
