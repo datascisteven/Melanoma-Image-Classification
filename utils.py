@@ -2,8 +2,9 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-from keras.preprocessing.image import ImageDataGenerator
-from keras.utils import Sequence
+import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.utils import Sequence
 from sklearn.metrics import precision_score, recall_score, f1_score, average_precision_score
 from PIL import ImageFile
 from sklearn.metrics import confusion_matrix

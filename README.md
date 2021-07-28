@@ -2,11 +2,7 @@
 
 **Project Author:**  Steven Yan
 
-**Project Advisor:**  Justin Tannenbaum
-
 **Presentation Link:** https://prezi.com/view/JoLKnGuw0ZFBYFZra0c3/
-
-Final capstone project for Flatiron School Data Science Online Immersive Program
 
 <img src="images/melanoma_images.png">
 
@@ -16,6 +12,8 @@ Final capstone project for Flatiron School Data Science Online Immersive Program
 ## Overview
 
 Skin cancer is the most prevalent type of cancer with melanoma being responsible for 75% of skin cancer deaths despite being the least common type. According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95% and can be cured with minor surgery. which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
+
+<center><img src="images/ABCDEs-of-Melanoma.jpg"></center>
 
 
 ## Business Understanding:
@@ -67,7 +65,8 @@ I subsetted the melanoma images and inserted them as additional samples of the m
 
 **2017 ISIC Training Dataset:**
 
-<img src="images/skin_cancer_types.png">
+<center><img src="images/skin-cancers-types.jpg"></center>
+</br>
 
 - 2000 images in JPEG format and CSV with clinical metadata
 	- 374 images diagnosed as melanoma and 1626 images as other diagnoses lumped into non-melanoma
@@ -79,7 +78,7 @@ The 2020 training dataset, supplemented with the 2019 melanoma images, form our 
 
 ## Data Understanding:
 
-<img src="images/age_distribution.png">
+<center><img src="images/age_distribution.png"></center>
 
 ### Age Distribution
 
@@ -128,7 +127,7 @@ I started with experimenting with Densely Connected Network and moved quickly in
 	- prevents model from overfitting since some number of layer outputs are randomly ignored or “dropped out"
 - `MaxPooling2D()` 
 	- To reduce dimensionality of images by reducing number of pixels in output
-	- `layers.MaxPool2D(pool_size=(2,2))`
+	- `layers.MaxPooling2D(pool_size=(2,2))`
 - `Flatten()`
 	- To be able to generate a prediction, flatten output of convolutional base
 	- `layers.Flatten()`
@@ -137,11 +136,7 @@ I started with experimenting with Densely Connected Network and moved quickly in
 	- Loss function: for binary classification \`loss= ‘binary\_crossentropy’
 	- last Dense layer should have unit of 1 and sigmoid as activation
 
-I also ran the following transfer learning models on the dataset:
-
-1. VGG19
-2. AlexNet
-3. ResNet50
+I also trained the following transfer learning models with the dataset: VGG19, AlexNet, and ResNet50.
 
 
 ## Evaluation:
@@ -154,22 +149,39 @@ In handling imbalanced datasets, these were the metrics I monitored in the train
 - ROC-AUC Score (TPR vs. TNR)
 - PR-AUC Score (Precision vs. Recall)
 
-In selecting the best model in the training process, I looked predominantly at lowering validation loss with an eye to keeping the PR-AUC score high.  In selecting the best model in comparing different models, I looked at overall accuracy and keeping False Negatives at the very minimum.  For medical applications, a false negative would have the greatest consequence for a patient, essentially not to be diagnosed with cancer when in fact he or she does have cancer.  For melanoma, early detection is absolutely essential since melanoma only becomes untreatable once it metastasizes to other parts of the body.
+In selecting the best model in the training process, I looked predominantly at lowering validation loss with an eye to keeping the PR-AUC score high.  
+
+In selecting the best model in comparing different models, I looked at overall accuracy and keeping False Negatives at the very minimum.  For medical applications, a false negative would have the greatest consequence for a patient, essentially not to be diagnosed with cancer when in fact he or she does have cancer.  For melanoma, early detection is absolutely essential since melanoma only becomes untreatable once it metastasizes to other parts of the body.
 
 I evaluated each model on three testing datasets, the sampled testing set, and the original testing set from the 80-10-10 split, as well as the additional testing set from the 2017 ISIC Dataset.
 
 
-**Results**
+## Results:
 
-The CNNs created from scratch did not ultimately generalize very well to the additional holdout set, namely 2017 ISIC Dataset.  They seemed to perform well with the training-validation-testing datasets from the original amalgam of the 2020 and 2019 datasets.  The pretrained models performed significantly better with the additional holdout set….
+I had created two main holdout sets for testing, one from the original combined dataset and another from the ISIC 2017 dataset.
 
-(updating results to incorporate newer models)
-
-Here is the confusion matrix:
-
-<img src="images/cnn2_cf.png">
+All the models performed well with the holdout set from the original dataset with around 93% accuracy, but the VGG16-based CNN model achieved a 94.5% accuracy.  On the additional holdout set, the models for the most part achieved a mere 60-70% accuracy, and only ResNet50 achieved a 80% accuracy.  ResNet50 achieved a 90% accuracy on the original holdout set.
 
 
+<img src="images/cf_resnet.png" width='300' />
+<img src="images/cf_resnet_1.png" width='300' style="float:left" />
+
+
+However, what is concerning is that the large number of false negatives for ResNet50 on the additional holdout set.  Despite the model having 80% accuracy, 78% of it is accounted for by the true negatives and only a very small part of the True Positives.
+
+
+## Next Steps:
+
+- Running on GPU
+    - Training models with entire dataset to see whether that improves results
+- Ensemble Models
+    - Try additional models to get better metrics for additional holdout set
+- Flutter Implementation
+    - Developing an app for deployment
+- Pytorch Implementation
+    - Expanding my repertoire of tools
+
+   
 
 ## Folder Structure:
 
@@ -178,6 +190,7 @@ Here is the confusion matrix:
 	│   ├── albumentation.ipynb		<- notebook for displaying augmentations
 	│   ├── EDA.ipynb				<- notebook for dataset understanding and EDA
 	│   ├── folders.ipynb			<- notebook for image folder management
+	│   ├── holdout.ipynb			<- notebook for predicting on holdout sets
 	│   ├── preaugmentation.ipynb	<- notebook for models with imbalanced dataset
 	│   ├── postaugmentation.ipynb	<- notebook for models with dataset post-augmentations
 	│   ├── pretrained.ipynb		<- notebook for pretrained models
@@ -185,21 +198,6 @@ Here is the confusion matrix:
 	├── final_notebook.ipynb        <- final notebook for capstone project
 	├── _data                       <- folder of csv files (csv)
 	├── MVP Presentation.pdf		<- pdf of the MVP presentation
-	├── _images                     <- folder containing visualizations
-	├── _split						<- folder substructure of image folder (not on Github)
-	│   ├──	_train					<- folder containing training JPEG files
-	│   │	├── _mel					
-	│   │	└── _not_mel				
-	│   ├── _train_dcm				<- folder containing training DICOM files
-	│   ├── _val					<- folder containing validation JPEG files
-	│   │	├── _mel
-	│   │	└── _not_mel					
-	│   ├── _test					<- folder containing test JPEG files
-	│   │	├── _mel
-	│   │	└── _not_mel	
-	│   └── _train_imb				<- folder containing original JPEG files
-	│	├── _mel
-	│	└── _not_mel	
 	└── utils.py					<- py file with self-defined functions
 
 
@@ -207,24 +205,24 @@ Here is the confusion matrix:
 
 **Steven Yan**
 
-<img src="images/mail_icon.png"> Email:  [stevenyan@uchicago.edu][1]
+<img src="images/mail_icon.png"> **Email:**  [stevenyan@uchicago.edu][1]
 
-<img src="images/linkedin_icon.png"> LinkedIn:   [https://www.linkedin.com/in/datascisteven][2]
+<img src="images/linkedin_icon.png"> **LinkedIn:**   [https://www.linkedin.com/in/datascisteven][2]
 
-<img src="images/github_icon.png"> Github:  [https://www.github.com/datascisteven][3]
+<img src="images/github_icon.png"> **Github:** [https://www.github.com/datascisteven][3]
 
 
 ## References:
 
 International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration [https://doi.org/10.34970/2020-ds01][4] (2020).
 
-Rotemberg, V. _et al_. A patient-centric dataset of images and metadata for identifying melanomas using clinical context. _Sci. Data_ 8: 34 (2021). [https://doi.org/10.1038/s41597-021-00815-z]()
+Rotemberg, V. _et al_. A patient-centric dataset of images and metadata for identifying melanomas using clinical context. _Sci. Data_ 8: 34 (2021). [https://doi.org/10.1038/s41597-021-00815-z][5]
 
 ISIC 2019 data is provided courtesy of the following sources:
 
-BCN20000 Dataset: (c) Department of Dermatology, Hospital Clínic de Barcelona
-HAM10000 Dataset: (c) by ViDIR Group, Department of Dermatology, Medical University of Vienna; [https://doi.org/10.1038/sdata.2018.161][6]
-MSK Dataset: (c) Anonymous; [https://arxiv.org/abs/1710.05006][7] ; [https://arxiv.org/abs/1902.03368][8]
+- BCN20000 Dataset: (c) Department of Dermatology, Hospital Clínic de Barcelona
+- HAM10000 Dataset: (c) by ViDIR Group, Department of Dermatology, Medical University of Vienna; [https://doi.org/10.1038/sdata.2018.161][6]
+- MSK Dataset: (c) Anonymous; [https://arxiv.org/abs/1710.05006][7] ; [https://arxiv.org/abs/1902.03368][8]
 
 Tschandl, P. _et al_. The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions. _Sci. Data_ 5: 180161 doi: 10.1038/sdata.2018.161 (2018)
 
@@ -239,6 +237,7 @@ Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection 2018: A C
 [2]:	https://www.linkedin.com/in/datascisteven
 [3]:	https://www.github.com/datascisteven
 [4]:	https://doi.org/10.34970/2020-ds01
+[5]:    https://doi.org/10.1038/s41597-021-00815-z
 [6]:	https://doi.org/10.1038/sdata.2018.161
 [7]:	https://arxiv.org/abs/1710.05006
 [8]:	https://arxiv.org/abs/1902.03368

@@ -6,8 +6,8 @@ from PIL import ImageFile
 from sklearn.metrics import confusion_matrix
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 import tensorflow as tf
-from keras.models import Sequential
-from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization, Conv2D, MaxPool2D, MaxPooling2D
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization, Conv2D, MaxPool2D, MaxPooling2D
 
 
 def sixplot(var, auc, v_auc, pr_auc, v_pr_auc, prec, v_prec, rec, v_rec):
