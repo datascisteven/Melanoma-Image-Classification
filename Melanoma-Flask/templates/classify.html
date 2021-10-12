@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Ultimate Dog and Cat Classifier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+
+.hero {
+    background: black url(static/blue_background.jpg) center / cover;
+}
+    </style>
+
+    <style>
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    </style>
+
+  </head>
+
+    
+<body>
+
+<!-- .hero -->
+<section class="hero is-fullheight" has-background-black>
+
+    <section class="section">
+        <div class="container" >
+            <center><h1 class="title" style="font-size:2.5rem; background-color:white;" >
+                Melanoma Classifier
+            </h1>
+            <p class="subsubtitle" style="background-color:white;">
+                by <strong>Steven Yan</strong>
+            </p>
+            </center>
+        </div>   
+        </section> 
+
+        <div class="columns">
+                <div class="column is-narrow">
+                </div>
+
+
+                <div class="column is-one-half has-text-centered">
+                  <!-- <figure class="image is-1by1"> -->
+                    <img class="pred_img" src="{{ url_for('send_file', filename=image_file_name)}}"/>
+                  <!-- </figure> -->
+                </div>
+                <div class="column is-one-half has-text-centered" style="font-size:2.5rem" >
+      
+                        <h2 id ="pred" style="color:black">
+                            <span style="font-weight: bold; color:whitesmoke;">{{ label }}</span>
+                        </h2>
+            
+                        <h2 style="font-size: 2rem">
+                          Confidence: <span style="font-weight: bold; color:whitesmoke;">{{prob}}%</span>
+                        </h2>
+                        <br>
+                        <a href="/" class="button is-black is-inverted" style="font-size:1.5rem">Back to Home</a>
+                    </div>
+            </div>    
+
+    <section class="section">
+            <div class="container">
+            </div>   
+            </section> 
+        </section>
+<!-- /.hero -->
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>

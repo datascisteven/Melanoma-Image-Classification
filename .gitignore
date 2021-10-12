@@ -131,3 +131,11 @@ dmypy.json
 /logs/*
 /flutter
 
+* Flask app
+
+/Melanoma-Flask/.coveragerc
+/Melanoma-Flask/.pre-commit-config.yaml
+/Melanoma-Flask/.editorconfig
+/Melanoma-Flask/Pipfile
+/Melanoma-Flask/Pipfile.lock
+/Melamoma-Flask/setup.cfg
