@@ -1,5 +1,7 @@
 # Melanoma-Image-Classification Project Page
 
+**Project Page:** https://datascisteven.github.io/Melanoma-Image-Classification
+
 **Project Author:**  Steven Yan
 
 **Presentation Link:** https://prezi.com/view/JoLKnGuw0ZFBYFZra0c3/
