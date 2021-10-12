@@ -1,4 +1,4 @@
-# Developing a Melanoma Detector for Deployment using a Neural Network Model for Classification
+# Melanoma-Image-Classification Project Page
 
 **Project Author:**  Steven Yan
 
