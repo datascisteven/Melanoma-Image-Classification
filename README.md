@@ -1,4 +1,4 @@
-# Developing a Melanoma Classifier for Mobile App Deployment
+# Developing a Melanoma Detector for Deployment using a Neural Network Model for Classification
 
 **Project Author:**  Steven Yan
 
