@@ -11,7 +11,7 @@ UPLOAD_FOLDER = "uploads/all_class"
 STATIC_FOLDER = "static"
 
 # Load model
-model = tf.keras.models.load_model(STATIC_FOLDER + "model.h5")
+model = tf.keras.models.load_model(STATIC_FOLDER + "/model.h5")
 
 IMAGE_SIZE = 224
 
