@@ -47,7 +47,6 @@ Skin cancer is the most prevalent type of cancer with melanoma being responsible
     <figcaption>Sample of Moles from Melanoma Patients</figcaption>
 </figure>
 </center>
-
 <br>
 <br>
 # Business Understanding:
@@ -59,7 +58,6 @@ Deploying an app for public consumption that can screen for potential melanoma w
 Lastly, it will begin to address some of the inherent social inequities in healthcare and equalize access to expert advice for people from every background.   According to the American Cancer Society, the 5-year survival rate of African-American patients is 69%, while for Caucasians it is 94%, granted the lifetime risk of getting melanoma is over 20 times higher than for non-Hispanic Caucasians.
 
 What could also explain the difference in the survival rates?  Those very marginalized populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers have been constructed due to past offenses against the communities and some are purely cultural.  Creating such an mobile app would allow for access by such marginalized individuals and break down some of these initial barriers so that they may receive the care they truly need.
-
 <br>
 <br>
 # Data Sources:
@@ -104,6 +102,8 @@ I subsetted the melanoma images and inserted them as additional samples of the m
     <figcaption>Different Types of Skin Cancer Including Non-Melanomic</figcaption>
 </figure>
 </center>
+<br>
+<br>
 
 **2017 ISIC Training Dataset:**
 
@@ -124,7 +124,8 @@ The 2020 training dataset, supplemented with the 2019 melanoma images, form our 
     <figcaption>Age Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
 </figure>
 </center>
-
+<br>
+<br>
 
 ## Age Distribution
 
@@ -133,7 +134,7 @@ The visualizations illustrate a difference in the distribution of age between th
 According to the CDC, the average age of diagnosis is 63.  This seems to be in alignment with the higher median age of melanoma patients in our datasets.
 
 
-<br>
+
 
 <center>
 <figure>
@@ -141,7 +142,7 @@ According to the CDC, the average age of diagnosis is 63.  This seems to be in a
     <figcaption>Gender Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
 </figure>
 </center>
-
+<br>
 
 
 ## Gender Distribution
@@ -150,7 +151,6 @@ There is a similar distribution in gender between the training and testing datas
 
 According to the CDC, there is a 60/40 split in the melanoma population for males and females due to the fact that under 50, melanoma occurs more frequently in women, while above 50, occurs more often in men and increasingly so moving into 80.
 
-<br>
 
 <img src="images/site_distribution.png">
 <center>
@@ -159,7 +159,7 @@ According to the CDC, there is a 60/40 split in the melanoma population for male
     <figcaption>Site Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
 </figure>
 </center>
-
+<br>
 
 ## Site Distribution
 
@@ -203,7 +203,8 @@ I started with experimenting with Densely Connected Network and moved quickly in
 	- last Dense layer should have unit of 1 and sigmoid as activation
 
 I also trained the following transfer learning models with the dataset: VGG19, AlexNet, and ResNet50.
-
+<br>
+<br>
 
 # Evaluation:
 
@@ -220,7 +221,8 @@ In selecting the best model in the training process, I looked predominantly at l
 In selecting the best model in comparing different models, I looked at overall accuracy and keeping False Negatives at the very minimum.  For medical applications, a false negative would have the greatest consequence for a patient, essentially not to be diagnosed with cancer when in fact he or she does have cancer.  For melanoma, early detection is absolutely essential since melanoma only becomes untreatable once it metastasizes to other parts of the body.
 
 I evaluated each model on three testing datasets, the sampled testing set, and the original testing set from the 80-10-10 split, as well as the additional testing set from the 2017 ISIC Dataset.
-
+<br>
+<br>
 
 # Results:
 
@@ -238,10 +240,12 @@ All the models performed well with the holdout set from the original dataset wit
 <img src="images/cf_resnet.png" width='300' />
 <img src="images/cf_resnet_1.png" width='300' style="float:left" />
 </div>
-</br>
+<br>
 
 However, what is concerning is that the large number of false negatives for ResNet50 on the additional holdout set.  Despite the model having 80% accuracy, 78% of it is accounted for by the true negatives and only a very small part of the True Positives.
 
+<br>
+<br>
 
 # Next Steps:
 
@@ -254,7 +258,8 @@ However, what is concerning is that the large number of false negatives for ResN
 - Pytorch Implementation
     - Expanding my repertoire of tools
 
-   
+ <br>
+ <br>
 
 # Folder Structure:
 
@@ -273,7 +278,8 @@ However, what is concerning is that the large number of false negatives for ResN
 	├── MVP Presentation.pdf		<- pdf of the MVP presentation
 	└── utils.py					<- py file with self-defined functions
 
-
+<br>
+<br>
 
 # References:
 
@@ -295,6 +301,8 @@ Marc Combalia, Noel C. F. Codella, Veronica Rotemberg, Brian Helba, Veronica Vil
 
 Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection 2018: A Challenge Hosted by the International Skin Imaging Collaboration (ISIC)”, 2018; [https://arxiv.org/abs/1902.03368][9]
 
+<br>
+<br>
 
 # Contact Information:
 
