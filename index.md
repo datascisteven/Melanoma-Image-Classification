@@ -1,13 +1,8 @@
 <h1><center><font size="6">Developing a Melanoma Detector</font></center></h1>
 
-<h2><center><font size="5">by Steven Yan</font></center></h1>
+<h2><center><font size="5">by Steven Yan</font></center></h2>
 
 **Presentation Link:** https://prezi.com/view/JoLKnGuw0ZFBYFZra0c3/
-
-<center><img src="images/melanoma_images.png"></center>
-
-<center><img src="images/non_melanoma_images.png"></center>
-
 
 
 # Flask application
@@ -26,13 +21,35 @@ The homepage asks for the user to upload a JPEG of any size into the application
 <img src="images/Results.png">
 
 Upon pressing SUBMIT, you automatically get transferred to the Results page, and you are given a message to get the mole checked out or that it is just another beauty mark.  The confidence level of that prediction is also given.
-   
+
+<br>
+<br>
+
 # Overview
+
+<center>
+<figure>
+    <img src="images/non_melanoma_images.png" alt="Non-Melanoma Images">
+    <figcaption>Sample of Moles from Non-Melanoma Patients</figcaption>
+</figure>
+</center>
 
 Skin cancer is the most prevalent type of cancer with melanoma being responsible for 75% of skin cancer deaths despite being the least common type. According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95% and can be cured with minor surgery. which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
 
-<center><img src="images/ABCDEs-of-Melanoma.jpg"></center>
+<center>
+<figure>
+    <img src="images/ABCDEs-of-Melanoma.jpg" alt="ABCDE's of Melanoma">
+    <figcaption>Mnemonic Device for Melanoma Detection</figcaption>
+</figure>
+<br>
+<figure>
+    <img src="images/melanoma_images.png" alt="Melanoma Images">
+    <figcaption>Sample of Moles from Melanoma Patients</figcaption>
+</figure>
+</center>
 
+<br>
+<br>
 # Business Understanding:
 
 Dermatologists can detect melanomas through a full-body visual inspection supplemented by their years of clinical experience, as well as combining techniques such as dermoscopy to see more deeply into the skin and to determine whether there is a need for biopsy and total body photography for patients with an excessive number of moles where high-resolution digital photos are taken as a baseline.  Recent studies have shown that detecting such lesions through image analysis and machine learning can be as reliable as if not more than a visit with the dermatologist.  
@@ -43,7 +60,8 @@ Lastly, it will begin to address some of the inherent social inequities in healt
 
 What could also explain the difference in the survival rates?  Those very marginalized populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers have been constructed due to past offenses against the communities and some are purely cultural.  Creating such an mobile app would allow for access by such marginalized individuals and break down some of these initial barriers so that they may receive the care they truly need.
 
-
+<br>
+<br>
 # Data Sources:
 
 As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermatoscopic images of skin lesions.
@@ -80,10 +98,14 @@ I subsetted the melanoma images and inserted them as additional samples of the m
 
 **Additional minority class (melanoma) images added to original dataset:**  4522 
 
-**2017 ISIC Training Dataset:**
+<center>
+<figure>
+    <img src="images/skin-cancers-types.jpg" alt="Skin Cancer Types">
+    <figcaption>Different Types of Skin Cancer Including Non-Melanomic</figcaption>
+</figure>
+</center>
 
-<center><img src="images/skin-cancers-types.jpg"></center>
-</br>
+**2017 ISIC Training Dataset:**
 
 - 2000 images in JPEG format and CSV with clinical metadata
 	- 374 images diagnosed as melanoma and 1626 images as other diagnoses lumped into non-melanoma
@@ -92,10 +114,17 @@ I subsetted the melanoma images and inserted them as additional samples of the m
 
 The 2020 training dataset, supplemented with the 2019 melanoma images, form our training-validation-testing sets at a 80/10/10 split, and the 2017 training dataset becomes our additional testing or holdout set to see how well the model generalizes to unseen data.
 
-
+<br>
+<br>
 # Data Understanding:
 
-<center><img src="images/age_distribution.png"></center>
+<center>
+<figure>
+    <img src="images/age_distribution.png" alt="Age Distribution of Dataset">
+    <figcaption>Age Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
+</figure>
+</center>
+
 
 ## Age Distribution
 
@@ -104,7 +133,16 @@ The visualizations illustrate a difference in the distribution of age between th
 According to the CDC, the average age of diagnosis is 63.  This seems to be in alignment with the higher median age of melanoma patients in our datasets.
 
 
-<img src="images/gender_distribution.png">
+<br>
+
+<center>
+<figure>
+    <img src="images/gender_distribution.png" alt="Gender Distribution of Dataset">
+    <figcaption>Gender Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
+</figure>
+</center>
+
+
 
 ## Gender Distribution
 
@@ -112,8 +150,16 @@ There is a similar distribution in gender between the training and testing datas
 
 According to the CDC, there is a 60/40 split in the melanoma population for males and females due to the fact that under 50, melanoma occurs more frequently in women, while above 50, occurs more often in men and increasingly so moving into 80.
 
+<br>
 
 <img src="images/site_distribution.png">
+<center>
+<figure>
+    <img src="images/site_distribution.png" alt="Site Distribution of Dataset">
+    <figcaption>Site Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
+</figure>
+</center>
+
 
 ## Site Distribution
 
@@ -123,6 +169,8 @@ There is one main difference between the training and testing datasets after the
 
 Because UV damage can be the cause for melanoma, it can manifest in body areas that receive intermittent sun exposure, such as the trunk, legs, and arms, and consistently higher sun exposure, such as the face and head. More rarely, for instance, a melanoma grows on the soles of your feet, the palms of your hands, or even in the mucous membranes of your mouth, vagina, or anus.
 
+<br>
+<br>
 
 # Modeling:
 
@@ -133,6 +181,7 @@ I continued the modeling process on a 20% sample of the original dataset since e
 I started with experimenting with Densely Connected Network and moved quickly into Convolutional Neural Networks.  In my initial testing of models, only VGG16 produced a model that produced workable learning curves.  I simplified the model by lowering batch size, adding Dropout layers, removing some convolutional layers, and using EarlyStopping callback allowed me to finally to play around with different parameters and different models.
 
 **Final Convolutional Neural Network rubric:**
+
 - `Sequential()`
 - 4 convolutional layers with input shape (256, 256, 3) with filters applied to extract different features:
 	- filters: number of filters that convolutional layer will learn
