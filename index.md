@@ -124,8 +124,7 @@ The 2020 training dataset, supplemented with the 2019 melanoma images, form our 
     <figcaption>Age Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
 </figure>
 </center>
-<br>
-<br>
+<p></p>
 
 ## Age Distribution
 
@@ -133,16 +132,13 @@ The visualizations illustrate a difference in the distribution of age between th
 
 According to the CDC, the average age of diagnosis is 63.  This seems to be in alignment with the higher median age of melanoma patients in our datasets.
 
-
-
-
 <center>
 <figure>
     <img src="images/gender_distribution.png" alt="Gender Distribution of Dataset">
     <figcaption>Gender Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
 </figure>
 </center>
-<br>
+<p></p>
 
 
 ## Gender Distribution
@@ -159,7 +155,7 @@ According to the CDC, there is a 60/40 split in the melanoma population for male
     <figcaption>Site Distribution of Melanoma vs. Non-Melanoma Patients</figcaption>
 </figure>
 </center>
-<br>
+<p></p>
 
 ## Site Distribution
 
