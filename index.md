@@ -1,6 +1,6 @@
+<h1><center><font size="6">Developing a Melanoma Detector</font></center></h1>
 
-
-**Project Author:**  Steven Yan
+<h2><center><font size="5">by Steven Yan</font></center></h1>
 
 **Presentation Link:** https://prezi.com/view/JoLKnGuw0ZFBYFZra0c3/
 
@@ -9,14 +9,31 @@
 <center><img src="images/non_melanoma_images.png"></center>
 
 
-## Overview
+
+# Flask application
+
+While I had been exploring implementation through Flutter for app deployment, Flask seemed much more feasible given my time constraints and level of expertise.
+
+## Home page:
+
+<img src="images/Homepage.png">
+
+The homepage asks for the user to upload a JPEG of any size into the application and to press SUBMIT once done.
+
+
+## Results page:
+
+<img src="images/Results.png">
+
+Upon pressing SUBMIT, you automatically get transferred to the Results page, and you are given a message to get the mole checked out or that it is just another beauty mark.  The confidence level of that prediction is also given.
+   
+# Overview
 
 Skin cancer is the most prevalent type of cancer with melanoma being responsible for 75% of skin cancer deaths despite being the least common type. According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95% and can be cured with minor surgery. which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
 
 <center><img src="images/ABCDEs-of-Melanoma.jpg"></center>
 
-
-## Business Understanding:
+# Business Understanding:
 
 Dermatologists can detect melanomas through a full-body visual inspection supplemented by their years of clinical experience, as well as combining techniques such as dermoscopy to see more deeply into the skin and to determine whether there is a need for biopsy and total body photography for patients with an excessive number of moles where high-resolution digital photos are taken as a baseline.  Recent studies have shown that detecting such lesions through image analysis and machine learning can be as reliable as if not more than a visit with the dermatologist.  
 
@@ -27,7 +44,7 @@ Lastly, it will begin to address some of the inherent social inequities in healt
 What could also explain the difference in the survival rates?  Those very marginalized populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers have been constructed due to past offenses against the communities and some are purely cultural.  Creating such an mobile app would allow for access by such marginalized individuals and break down some of these initial barriers so that they may receive the care they truly need.
 
 
-## Data Sources:
+# Data Sources:
 
 As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermatoscopic images of skin lesions.
 
@@ -76,11 +93,11 @@ I subsetted the melanoma images and inserted them as additional samples of the m
 The 2020 training dataset, supplemented with the 2019 melanoma images, form our training-validation-testing sets at a 80/10/10 split, and the 2017 training dataset becomes our additional testing or holdout set to see how well the model generalizes to unseen data.
 
 
-## Data Understanding:
+# Data Understanding:
 
 <center><img src="images/age_distribution.png"></center>
 
-### Age Distribution
+## Age Distribution
 
 The visualizations illustrate a difference in the distribution of age between the melanoma vs. non-melanoma patients, but not so much between the training and testing datasets.  Upon calculation, for the training dataset, the mean age for melanoma patients is 60, while the mean age for non-melanoma patients is 50.  For the testing dataset, the median age for melanoma patients is also 60, while the mean age for non-melanoma patients is 45. 
 
@@ -89,7 +106,7 @@ According to the CDC, the average age of diagnosis is 63.  This seems to be in a
 
 <img src="images/gender_distribution.png">
 
-### Gender Distribution
+## Gender Distribution
 
 There is a similar distribution in gender between the training and testing datasets.  When comparing melanoma vs. non-melanoma patients, there seems to be an unequal distribution in gender for the melanoma patients, and melanoma seems to affect males to a greater proportion than females, almost a 60/40 proportion.  This observation is in line with the published data.
 
@@ -98,7 +115,7 @@ According to the CDC, there is a 60/40 split in the melanoma population for male
 
 <img src="images/site_distribution.png">
 
-### Site Distribution
+## Site Distribution
 
 When EDA was performed without the 2019 minority class additions, there was not a difference in site distribution between melanoma and non-melanoma patients.  With the addition of the 2019 melanoma instances, there is a difference in site distribution between melanoma and non-melanoma patients.  The 2019 melanoma instances separated the category of torso into more specific areas of the torso.  I lumped the anterior torso, posterior torso, lateral torso, and torso back into one category, which makes it apparent as overwhelmingly the most common anatomical site.  
 
@@ -107,7 +124,7 @@ There is one main difference between the training and testing datasets after the
 Because UV damage can be the cause for melanoma, it can manifest in body areas that receive intermittent sun exposure, such as the trunk, legs, and arms, and consistently higher sun exposure, such as the face and head. More rarely, for instance, a melanoma grows on the soles of your feet, the palms of your hands, or even in the mucous membranes of your mouth, vagina, or anus.
 
 
-## Modeling:
+# Modeling:
 
 Until I addressed the class imbalance, I was unable to produce learning curves that looked anything that resembled what is to be expected.  I started with ImageDataGenerator and eventually used the Albumentation module to produce a formula for creating a transformation of every melanoma instance in the final training dataset.
 
@@ -139,7 +156,7 @@ I started with experimenting with Densely Connected Network and moved quickly in
 I also trained the following transfer learning models with the dataset: VGG19, AlexNet, and ResNet50.
 
 
-## Evaluation:
+# Evaluation:
 
 In handling imbalanced datasets, these were the metrics I monitored in the training process:
 
@@ -156,7 +173,7 @@ In selecting the best model in comparing different models, I looked at overall a
 I evaluated each model on three testing datasets, the sampled testing set, and the original testing set from the 80-10-10 split, as well as the additional testing set from the 2017 ISIC Dataset.
 
 
-## Results:
+# Results:
 
 I had created two main holdout sets for testing, one from the original combined dataset and another from the ISIC 2017 dataset.
 
@@ -177,7 +194,7 @@ All the models performed well with the holdout set from the original dataset wit
 However, what is concerning is that the large number of false negatives for ResNet50 on the additional holdout set.  Despite the model having 80% accuracy, 78% of it is accounted for by the true negatives and only a very small part of the True Positives.
 
 
-## Next Steps:
+# Next Steps:
 
 - Running on GPU
     - Training models with entire dataset to see whether that improves results
@@ -190,7 +207,7 @@ However, what is concerning is that the large number of false negatives for ResN
 
    
 
-## Folder Structure:
+# Folder Structure:
 
 	├── README.md                   <- the top-level README for reviewers of this project
 	├── _notebooks					<- folder containing all the project notebooks
@@ -208,18 +225,8 @@ However, what is concerning is that the large number of false negatives for ResN
 	└── utils.py					<- py file with self-defined functions
 
 
-## Contact Information:
 
-**Steven Yan**
-
-<img src="images/mail_icon.png"> **Email:**  [stevenyan@uchicago.edu][1]
-
-<img src="images/linkedin_icon.png"> **LinkedIn:**   [https://www.linkedin.com/in/datascisteven][2]
-
-<img src="images/github_icon.png"> **Github:** [https://www.github.com/datascisteven][3]
-
-
-## References:
+# References:
 
 International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration [https://doi.org/10.34970/2020-ds01][4] (2020).
 
@@ -240,14 +247,22 @@ Marc Combalia, Noel C. F. Codella, Veronica Rotemberg, Brian Helba, Veronica Vil
 Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection 2018: A Challenge Hosted by the International Skin Imaging Collaboration (ISIC)”, 2018; [https://arxiv.org/abs/1902.03368][9]
 
 
-[1]:	mailto:stevenyan@uchicago.edu
-[2]:	https://www.linkedin.com/in/datascisteven
-[3]:	https://www.github.com/datascisteven
+# Contact Information:
+
+[![Email Badge](https://img.shields.io/static/v1?label=Email&message=datascisteven@gmail.com&color=8b0000&style=for-the-badge&logo=GMail&logoColor=white&logoWidth=30)](mailto:datascisteven@gmail.com)
+
+[![Github Badge](https://img.shields.io/static/v1?label=GitHub&message=@datascisteven&color=9966CC&style=for-the-badge&logo=GitHub&logoWidth=30)](https://www.github.com/datascisteven)
+
+[![LinkedIn Badge](https://img.shields.io/static/v1?label=LinkedIn&message=@datascisteven&color=0A66C2&style=for-the-badge&logo=LinkedIn&logoWidth=30)](https://www.linkedin.com/in/datascisteven)
+
+[![Medium Badge](https://img.shields.io/static/v1?label=Medium&message=@datascisteven&color=003366&style=for-the-badge&logo=Medium&logoWidth=30)](https://datascisteven.medium.com)
+
+[![Portfolio Badge](https://img.shields.io/static/v1?label=Website&message=datascisteven.github.io&color=FF6600&style=for-the-badge&logo=GoogleChrome&logoColor=white&logoWidth=30)](https://datascisteven.github.io)
+
+
 [4]:	https://doi.org/10.34970/2020-ds01
 [5]:    https://doi.org/10.1038/s41597-021-00815-z
 [6]:	https://doi.org/10.1038/sdata.2018.161
 [7]:	https://arxiv.org/abs/1710.05006
 [8]:	https://arxiv.org/abs/1902.03368
 [9]:	https://arxiv.org/abs/1902.03368
-
-

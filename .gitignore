@@ -130,4 +130,7 @@ dmypy.json
 /logs
 /logs/*
 /flutter
+/Melanoma-Flask
+/notebooks
+
 
