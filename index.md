@@ -33,6 +33,7 @@ Upon pressing SUBMIT, you automatically get transferred to the Results page, and
     <figcaption>Sample of Moles from Non-Melanoma Patients</figcaption>
 </figure>
 </center>
+<p></p>
 
 Skin cancer is the most prevalent type of cancer with melanoma being responsible for 75% of skin cancer deaths despite being the least common type. According to the American Cancer Society, in 2021, about 106,000 new melanomas will be diagnosed with a 60/40 split between men and women, and just over 7000 people are expected to die of melanoma.  Melanoma is the deadliest form of skin cancer and is responsible for an overwhelming majority of skin cancer deaths.  When melanoma is detected early, the survival rate exceeds 95% and can be cured with minor surgery. which is the very reason why having access to some sort of screening process as essential to prevent unnecessary death.
 
@@ -60,6 +61,7 @@ Lastly, it will begin to address some of the inherent social inequities in healt
 What could also explain the difference in the survival rates?  Those very marginalized populations inherently have constructed a certain skepticism and reticence to relate to and seek advice from a doctor of a different ethnic background.  Some of these barriers have been constructed due to past offenses against the communities and some are purely cultural.  Creating such an mobile app would allow for access by such marginalized individuals and break down some of these initial barriers so that they may receive the care they truly need.
 <br>
 <br>
+
 # Data Sources:
 
 As the leading healthcare organization for informatics in medical imaging, the Society for Imaging Informatics in Medicine (SIIM)'s mission is to advance medical imaging informatics through education, research, and innovation in a multi-disciplinary community. SIIM is joined by the International Skin Imaging Collaboration (ISIC), an international effort to improve melanoma diagnosis. The ISIC Archive contains the largest publicly available collection of quality-controlled dermatoscopic images of skin lesions.
@@ -108,8 +110,8 @@ I subsetted the melanoma images and inserted them as additional samples of the m
 **2017 ISIC Training Dataset:**
 
 - 2000 images in JPEG format and CSV with clinical metadata
-	- 374 images diagnosed as melanoma and 1626 images as other diagnoses lumped into non-melanoma
-- image\_id, age\_approximate, and sex
+- 374 images diagnosed as melanoma and 1626 images as other diagnoses lumped into non-melanoma
+- columns: `image_id`, `age_approximate`, and `sex`
 - 2000 entries of gold standard lesion diagnoses
 
 The 2020 training dataset, supplemented with the 2019 melanoma images, form our training-validation-testing sets at a 80/10/10 split, and the 2017 training dataset becomes our additional testing or holdout set to see how well the model generalizes to unseen data.
@@ -260,40 +262,42 @@ However, what is concerning is that the large number of false negatives for ResN
 # Folder Structure:
 
 	├── README.md                   <- the top-level README for reviewers of this project
-	├── _notebooks					<- folder containing all the project notebooks
-	│   ├── albumentation.ipynb		<- notebook for displaying augmentations
-	│   ├── EDA.ipynb				<- notebook for dataset understanding and EDA
-	│   ├── folders.ipynb			<- notebook for image folder management
-	│   ├── holdout.ipynb			<- notebook for predicting on holdout sets
+	├── _notebooks			<- folder containing all the project notebooks
+	│   ├── albumentation.ipynb	<- notebook for displaying augmentations
+	│   ├── EDA.ipynb		<- notebook for dataset understanding and EDA
+	│   ├── folders.ipynb		<- notebook for image folder management
+	│   ├── holdout.ipynb		<- notebook for predicting on holdout sets
 	│   ├── preaugmentation.ipynb	<- notebook for models with imbalanced dataset
 	│   ├── postaugmentation.ipynb	<- notebook for models with dataset post-augmentations
-	│   ├── pretrained.ipynb		<- notebook for pretrained models
-	│   └── utils.py  				<- py file with self-defined functions
+	│   ├── pretrained.ipynb	<- notebook for pretrained models
+	│   └── utils.py  		<- script file with self-defined functions
 	├── final_notebook.ipynb        <- final notebook for capstone project
-	├── _data                       <- folder of csv files (csv)
-	├── MVP Presentation.pdf		<- pdf of the MVP presentation
-	└── utils.py					<- py file with self-defined functions
+	├── _data                       <- folder of data files (*.csv)
+	├── _Melanoma-Flask             <- folder of Flask app
+	├── _images                     <- folder of image files (*.png, *.jpg)
+	├── MVP Presentation.pdf	<- pdf of the MVP presentation
+	└── utils.py			<- script file with self-defined functions
 
 <br>
 <br>
 
 # References:
 
-International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration [https://doi.org/10.34970/2020-ds01][4] (2020).
+International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration [https://doi.org/10.34970/2020-ds01][1] (2020).
 
-Rotemberg, V. _et al_. A patient-centric dataset of images and metadata for identifying melanomas using clinical context. _Sci. Data_ 8: 34 (2021). [https://doi.org/10.1038/s41597-021-00815-z][5]
+Rotemberg, V. _et al_. A patient-centric dataset of images and metadata for identifying melanomas using clinical context. _Sci. Data_ 8: 34 (2021). [https://doi.org/10.1038/s41597-021-00815-z][2]
 
 ISIC 2019 data is provided courtesy of the following sources:
 
 - BCN20000 Dataset: (c) Department of Dermatology, Hospital Clínic de Barcelona
-- HAM10000 Dataset: (c) by ViDIR Group, Department of Dermatology, Medical University of Vienna; [https://doi.org/10.1038/sdata.2018.161][6]
-- MSK Dataset: (c) Anonymous; [https://arxiv.org/abs/1710.05006][7] ; [https://arxiv.org/abs/1902.03368][8]
+- HAM10000 Dataset: (c) by ViDIR Group, Department of Dermatology, Medical University of Vienna; [https://doi.org/10.1038/sdata.2018.161][3]
+- MSK Dataset: (c) Anonymous; [https://arxiv.org/abs/1710.05006][4] ; [https://arxiv.org/abs/1902.03368][5]
 
-Tschandl, P. _et al_. The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions. _Sci. Data_ 5: 180161 doi: 10.1038/sdata.2018.161 (2018)
+Tschandl, P. _et al_. The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions. _Sci. Data_ 5: 180161, (2018); [https://doi.org/10.1038/sdata.2018.161][6] 
 
-Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection: A Challenge at the 2017 International Symposium on Biomedical Imaging (ISBI), Hosted by the International Skin Imaging Collaboration (ISIC)”, 2017; arXiv:1710.05006.
+Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection: A Challenge at the 2017 International Symposium on Biomedical Imaging (ISBI), Hosted by the International Skin Imaging Collaboration (ISIC)”, 2017; [https://arxiv.org/abs/1710.05006][7]
 
-Marc Combalia, Noel C. F. Codella, Veronica Rotemberg, Brian Helba, Veronica Vilaplana, Ofer Reiter, Allan C. Halpern, Susana Puig, Josep Malvehy: “BCN20000: Dermoscopic Lesions in the Wild”, 2019; arXiv:1908.02288.
+Marc Combalia, Noel C. F. Codella, Veronica Rotemberg, Brian Helba, Veronica Vilaplana, Ofer Reiter, Allan C. Halpern, Susana Puig, Josep Malvehy: “BCN20000: Dermoscopic Lesions in the Wild”, 2019; [https://arxiv.org/abs/1908.02288][8]
 
 Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection 2018: A Challenge Hosted by the International Skin Imaging Collaboration (ISIC)”, 2018; [https://arxiv.org/abs/1902.03368][9]
 
@@ -313,9 +317,12 @@ Codella, N. _et al_. “Skin Lesion Analysis Toward Melanoma Detection 2018: A C
 [![Portfolio Badge](https://img.shields.io/static/v1?label=Website&message=datascisteven.github.io&color=FF6600&style=for-the-badge&logo=GoogleChrome&logoColor=white&logoWidth=30)](https://datascisteven.github.io)
 
 
-[4]:	https://doi.org/10.34970/2020-ds01
-[5]:    https://doi.org/10.1038/s41597-021-00815-z
+[1]:	https://doi.org/10.34970/2020-ds01
+[2]:    https://doi.org/10.1038/s41597-021-00815-z
+[3]:	https://doi.org/10.1038/sdata.2018.161
+[4]:	https://arxiv.org/abs/1710.05006
+[5]:	https://arxiv.org/abs/1902.03368
 [6]:	https://doi.org/10.1038/sdata.2018.161
 [7]:	https://arxiv.org/abs/1710.05006
-[8]:	https://arxiv.org/abs/1902.03368
+[8]:	https://arxiv.org/abs/1908.02288
 [9]:	https://arxiv.org/abs/1902.03368
